@@ -1,0 +1,87 @@
+/* Ubicación del texto principal*/
+.text{
+    position: absolute;
+    width: 36%;
+    top: 200px;
+    left: 10%;
+}
+
+.text h1{
+    color:#DC4100;
+    font-size: 55px;
+    padding-bottom: 10px;
+}
+
+.text p{
+    color: #3d3d3d;
+    text-align: justify;
+}
+
+
+/* Ubicación de la foto*/
+.foto{
+    position: absolute;
+    width: 36%;
+    top: 120px;
+    right: 10%;
+}
+
+.foto img{
+    width: 90%;
+}
+
+/*Ubicación y apraciencia de la carta destrezas*/
+.card1{
+    position:absolute;
+    top: 700px;
+    left: 10%;
+    width: 36%;
+    color: grey;
+}
+
+/*General Cartas*/
+.titel h1{
+    color:#DC4100;
+    font-size: 35px;
+    display:flex;
+    align-items: center;
+}
+
+.titel img{
+    width: 55px;
+    padding-right: 17px;
+}
+
+.hline{
+    position: relative;
+    background-color: grey;
+    width: 100%;
+    height: 1px;
+    top: 10px;
+    
+}
+
+.grid{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    top:25px
+}
+.grid ul li{
+    font-size: 18px;
+    padding-top: 8px;
+}
+
+/*Ubicación y apraciencia de la carta idiomas*/
+.card2{
+    position:absolute;
+    top: 700px;
+    right: 10%;
+    width: 36%;
+    color: grey;
+}
+
+#sin {
+    list-style: none;
+    padding-top: 2px;
+}

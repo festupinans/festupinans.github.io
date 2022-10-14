@@ -67,12 +67,13 @@
     grid-template-columns: 1fr 1fr;
     top:25px
 }
+
 .grid ul li{
     font-size: 18px;
     padding-top: 8px;
 }
 
-/*Ubicación y apraciencia de la carta idiomas*/
+/*Ubicación y apariencia de la carta idiomas*/
 .card2{
     position:absolute;
     top: 700px;
@@ -84,4 +85,75 @@
 #sin {
     list-style: none;
     padding-top: 2px;
+}
+
+/*Ubicacion y apariencia de la carta interese*/
+.card3{
+    position: absolute;
+    top: 950px;
+    left: 10%;
+    width: 80%;
+    color: grey;
+}
+
+.grid2{
+    position: relative;
+    display: grid;
+    grid-gap: 16px;
+    padding: 16px;
+    grid-template-columns: repeat(auto-fill,minmax(250px, 2fr));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(200px,2fr);
+    overflow-x: auto;
+}
+
+.grid2 p{
+    font-size: 18px;
+    display:flex;
+    align-items: center;
+}
+
+.grid2 img{
+    height: 50px;
+    padding-right: 17px;
+    padding-left: 17px;
+}
+
+.grid2 div{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/*Ubicacion y apariencia de la carta portafolios*/
+.card4{
+    position: absolute;
+    top: 230px;
+    width: 100%;
+    color: grey;
+    padding-bottom: 50px;
+}
+
+.porta{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    top:35px
+}
+
+.boton{
+    background-color: #DC4100;
+    width: 300px;
+    height: 70px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.boton a{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
 }

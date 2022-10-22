@@ -1,112 +1,124 @@
-*{
-    margin: 0px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.menuall{
-    background-color: white;
-    
-}
-
-/*Ubicación, dimensiones y decoración del menu contactos*/
-.line1{
-    background-color: grey;
-    position: fixed;
-    width: 2px;
-    height: 30%;
-    right: 50px;
-    top: 15%;
-}
-
-.line2{
-    background-color: grey;
-    position: fixed;
-    width: 2px;
-    height: 15%;
-    right: 50px;
-    bottom: 5%;
-}
-
-.contac{
-    position: fixed;
-    width: 50px;
-    height: 100%;
-    right: 25px;
-}
-
-.contac nav ul li{
-    text-align: center;
-    list-style: none;
-    text-decoration: none;
-}
-
-.menuCon{
-    position:absolute;
-    right: 60%;
-    top: 48%;
-    width: 100%;
-}
-
-.menuCon img{
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-.imgM{
-    width: 35px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-}
-
-.contacto a{
-    color: #DC4100;
-}
-
-
-/*Ubicación, dimensiones y decoración del menu*/
-.menu{ 
-    z-index: 50;
-    background-color: white; 
-    position: fixed;
-    width: 68%;
-    padding-top: 2%;
-    padding-bottom: 1%;
-    left: 30%;
-}
-
-.menu nav ul{
-    list-style-type: none;
+body{
     margin: 0;
-    padding: 0;
-    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+    color: #3d3d3d;
 }
 
-.menu nav ul li{
-    float: right;
-    padding-right: 40px;
-}
-
-.menu nav ul li a{
-    display: block;
-    color: grey;
-    font-size: 17px;
-    text-align: center;
-    text-decoration: none;
-}
-
-/*Ubica la posición y dimensiones del logo*/
-.logo{
+/* BARRA SUPERIOR */
+.barTop{
     position: fixed;
-    z-index: 49;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Logo de la BARRA SUPERIOR */
+.logo{
     background-color: white;
-    right: 68%;
-    width: 350px;
-    left: 50px;
+    width: 25%;
+    z-index: 10;
+    padding-left: 30px;
+    padding-top: 10px;
+    border-bottom-right-radius: 30px;
 }
 
 .logo img{
     width: 250px;
-    padding-right: 15%;
+}
+
+/* Menu de la BARRA SUPERIOR */
+.menu{
+    z-index: 5;
+    background-color: white;
+    width: 52%;
+    left: 0;
+    height: 40px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-left: 100px;
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+
+/* Hover y decoración de los botones del menu principal */
+
+.menu button {
+    font-size: 17px;
+    color: grey;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+  }
+  
+.menu button:hover {
+    color: #DC4100;
+  }
+  
+.menu button:focus:after,
+.menu button:hover:after {
+    width: 100%;
+    left: 0%;
+  }
+  
+.menu button:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #DC4100;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+  }
+
+
+/* Contenedor - MENU DERECHO CONTACTOS */
+.barRightP{
+    position: fixed;
+    top: 54%;
+    right: 0;
+    width: 5%;
+}
+
+/* DIVS - Contenedores - MENU DERECHO CONTACTOS */
+.barRight{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+/* Linea superior - MENU DERECHO CONTACTOS */
+.line1{
+    background-color: grey;
+    position: fixed;
+    width: 2px;
+    height: 37%;
+    right: 50px;
+    top: 15%;
+}
+
+/* Linea inferior - MENU DERECHO CONTACTOS */
+.line2{
+    background-color: grey;
+    position: fixed;
+    width: 2px;
+    height: 12%;
+    right: 50px;
+    bottom: 5%;
+}
+
+/* Logos - MENU DERECHO CONTACTOS */
+.imgM{
+    width: 50%;
     padding-top: 5%;
+    padding-bottom: 5%;
 }

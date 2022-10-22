@@ -1,85 +1,78 @@
-/* Ubicación del texto principal*/
-.text{
-    position: absolute;
-    width: 36%;
-    top: 200px;
-    left: 10%;
+
+/* Contenedores DOS COLUMNAS */
+.contenedor2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 30px;
+    margin-top: 80px;
 }
 
-.text h1{
+.contenedor2 h1{
     color:#DC4100;
     font-size: 55px;
-    padding-bottom: 10px;
+    margin-bottom: 0;
+    margin-top: 120px;
 }
 
-.text p{
+.contenedor2 p{
     color: #3d3d3d;
     text-align: justify;
-}
-
-
-/* Ubicación de la foto*/
-.foto{
-    position: absolute;
-    width: 36%;
-    top: 120px;
-    right: 10%;
+    margin-top: 10px;
+    margin-bottom: 0;
 }
 
 .foto img{
-    width: 90%;
+    width: 100%;
 }
 
-/*Ubicación y apraciencia de la carta destrezas*/
-.card1{
-    position:absolute;
-    top: 700px;
-    left: 10%;
-    width: 36%;
-    color: grey;
+/* Contenedores UNA COLUMNAS */
+.contenedor1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 30px;
 }
 
-/*General Cartas*/
+.hline{
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+}
+
+.hline2{
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+}
+
+.dosListaGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.dosListaGrid ul li{
+    font-size: 18px;
+    padding-top: 8px;
+}
+
+/* Titulo - Contenedores */
 .titel h1{
     color:#DC4100;
     font-size: 35px;
     display:flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
+/* Imagen - Contenedores */
 .titel img{
     width: 55px;
     padding-right: 17px;
-}
-
-.hline{
-    position: relative;
-    background-color: grey;
-    width: 100%;
-    height: 1px;
-    top: 10px;
-    
-}
-
-.grid{
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    top:25px
-}
-
-.grid ul li{
-    font-size: 18px;
-    padding-top: 8px;
-}
-
-/*Ubicación y apariencia de la carta idiomas*/
-.card2{
-    position:absolute;
-    top: 700px;
-    right: 10%;
-    width: 36%;
-    color: grey;
 }
 
 #sin {
@@ -87,74 +80,110 @@
     padding-top: 2px;
 }
 
-/*Ubicacion y apariencia de la carta interese*/
-.card3{
-    position: absolute;
-    top: 950px;
-    left: 10%;
-    width: 80%;
-    color: grey;
+.contenedor3{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
 }
 
-.grid2{
-    position: relative;
+.listaHorizontal{
     display: grid;
     grid-gap: 16px;
     padding: 16px;
-    grid-template-columns: repeat(auto-fill,minmax(250px, 2fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
     grid-auto-flow: column;
-    grid-auto-columns: minmax(200px,2fr);
+    grid-auto-columns: minmax(250px, 2fr);
     overflow-x: auto;
 }
 
-.grid2 p{
+.listaHorizontal div{
+    width: auto;
+}
+
+.listaHorizontal p{
     font-size: 18px;
-    display:flex;
+    display: flex;
     align-items: center;
 }
 
-.grid2 img{
+.listaHorizontal img{
     height: 50px;
     padding-right: 17px;
     padding-left: 17px;
 }
 
-.grid2 div{
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-/*Ubicacion y apariencia de la carta portafolios*/
-.card4{
-    position: absolute;
-    top: 230px;
-    width: 100%;
-    color: grey;
-    padding-bottom: 50px;
+.contenedor4{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: 100px;
+    margin-bottom: 100px;
 }
 
 .porta{
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    top:35px
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    margin-top:50px
 }
 
 .boton{
-    background-color: #DC4100;
-    width: 300px;
+    width: auto;
     height: 70px;
-    border-radius: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
 }
 
-.boton a{
-    font-size: 20px;
-    font-weight: 600;
-    color: white;
-    text-decoration: none;
-}
+/* From uiverse.io by @alexmaracinaru */
+.cta {
+    border: none;
+    background: none;
+  }
+  
+  .cta span {
+    padding-bottom: 7px;
 
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 15px;
+    text-transform: uppercase;
+  }
+  
+  .cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+  }
+  
+  .cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .cta:active svg {
+    transform: scale(0.9);
+  }
+  
+  .hover-underline-animation {
+    position: relative;
+    color: #3d3d3d;
+    padding-bottom: 20px;
+  }
+  
+  .hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #DC4100;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+  }
+  
+  .cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }

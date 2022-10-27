@@ -1,89 +1,51 @@
-
-/* Contenedores DOS COLUMNAS */
-.contenedor2{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 30px;
-    margin-top: 80px;
+*{
+    font-family: 'Montserrat', sans-serif;
 }
 
-.contenedor2 h1{
+.textos h2{
     color:#DC4100;
-    font-size: 55px;
+    font-size: 3rem;
     margin-bottom: 0;
-    margin-top: 120px;
 }
 
-.contenedor2 p{
+.textos p{
     color: #3d3d3d;
-    text-align: justify;
-    margin-top: 10px;
-    margin-bottom: 0;
+    font-size: 1rem;
 }
 
-.foto img{
-    width: 100%;
-}
-
-/* Contenedores UNA COLUMNAS */
-.contenedor1{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 30px;
-}
-
-.hline{
-    width: 100%;
-    height: 1px;
-    background-color: grey;
-}
-
-.hline2{
-    width: 100%;
-    height: 1px;
-    background-color: grey;
-}
-
-.dosListaGrid{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
-.dosListaGrid ul li{
-    font-size: 18px;
-    padding-top: 8px;
-}
-
-/* Titulo - Contenedores */
-.titel h1{
-    color:#DC4100;
-    font-size: 35px;
-    display:flex;
+.centroF{
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 10px;
+    justify-content: center;
 }
 
-/* Imagen - Contenedores */
-.titel img{
-    width: 55px;
-    padding-right: 17px;
+.centroT{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.textJ{
+    text-align: justify;
+}
+
+.iconos{
+    width: 55px;
+    padding-right: 10px;
+}
+
+.subtitulo{
+    color: #DC4100;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+
 
 #sin {
     list-style: none;
     padding-top: 2px;
-}
-
-.contenedor3{
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 100px;
 }
 
 .listaHorizontal{
@@ -101,7 +63,7 @@
 }
 
 .listaHorizontal p{
-    font-size: 18px;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
 }
@@ -112,19 +74,8 @@
     padding-left: 17px;
 }
 
-.contenedor4{
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
-
-.porta{
-    display: flex;
-    flex-direction:row;
-    justify-content: center;
-    align-items: center;
-    margin-top:50px
+.mrginB{
+    margin-bottom: 5rem;
 }
 
 .boton{
@@ -144,8 +95,7 @@
   
   .cta span {
     padding-bottom: 7px;
-
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 500;
     padding-right: 15px;
     text-transform: uppercase;

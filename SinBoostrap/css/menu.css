@@ -4,23 +4,49 @@ body{
     color: #3d3d3d;
 }
 
+/* BARRA SUPERIOR */
+.barTop{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Logo de la BARRA SUPERIOR */
+.logo{
+    background-color: white;
+    width: 25%;
+    z-index: 10;
+    padding-left: 30px;
+    padding-top: 10px;
+    border-bottom-right-radius: 30px;
+}
+
+.logo img{
+    width: 250px;
+}
+
 /* Menu de la BARRA SUPERIOR */
 .menu{
+    z-index: 5;
     background-color: white;
+    width: 52%;
+    left: 0;
+    height: 40px;
+    padding-top: 20px;
+    padding-right: 50px;
+    padding-left: 100px;
     display: flex;
     flex-direction:row;
     justify-content: space-between;
-    align-items: center;
-}
-
-.menu div{
-    margin-left: 20px;
 }
 
 /* Hover y decoración de los botones del menu principal */
 
 .menu button {
-    font-size: 1rem;
+    font-size: 17px;
     color: grey;
     cursor: pointer;
     position: relative;
@@ -29,17 +55,17 @@ body{
     transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
     transition-duration: 400ms;
     transition-property: color;
-}
+  }
   
 .menu button:hover {
     color: #DC4100;
-}
+  }
   
 .menu button:focus:after,
 .menu button:hover:after {
     width: 100%;
     left: 0%;
-}
+  }
   
 .menu button:after {
     content: "";
@@ -53,46 +79,46 @@ body{
     transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
     transition-duration: 400ms;
     transition-property: width, left;
-}
+  }
 
 
 /* Contenedor - MENU DERECHO CONTACTOS */
 .barRightP{
     position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    right: 20px;
-    height: 85%;
+    top: 54%;
+    right: 0;
+    width: 5%;
 }
 
 /* DIVS - Contenedores - MENU DERECHO CONTACTOS */
 .barRight{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
 /* Linea superior - MENU DERECHO CONTACTOS */
 .line1{
     background-color: grey;
+    position: fixed;
     width: 2px;
-    height: 50%;
+    height: 37%;
+    right: 50px;
+    top: 15%;
 }
 
 /* Linea inferior - MENU DERECHO CONTACTOS */
 .line2{
     background-color: grey;
+    position: fixed;
     width: 2px;
-    height: 18%;
+    height: 12%;
+    right: 50px;
+    bottom: 5%;
 }
 
 /* Logos - MENU DERECHO CONTACTOS */
 .imgM{
-    width: 30px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 50%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }

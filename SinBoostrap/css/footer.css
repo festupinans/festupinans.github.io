@@ -1,0 +1,49 @@
+/* Footer */
+footer{
+    background-color: #DC4100;
+    color: white;
+    height: 300px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+}
+
+/* Logo en el footer */
+.BoLogo{
+    margin-left: 100px;
+    margin-right: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.BoLogo img{
+    height: 80px;
+}
+
+/* Menu en el footer */
+.BoMenu{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+/* Listas - Menu en el footer */
+
+
+#sinf {
+    list-style: none;
+    padding-top: 2px;
+}
+
+#sinf a {
+    color: white;
+    text-decoration: none;
+}
+
+#sinf a:hover {
+    text-decoration: underline;
+    padding: 5px;
+    font-weight: 600;
+}

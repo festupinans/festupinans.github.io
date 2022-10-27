@@ -1,0 +1,61 @@
+html{
+    font-size: 16px;
+}
+
+@media screen and (max-width: 576px){
+    html{
+        font-size: 12px;
+    }
+
+    .foto{
+        width: 40%;
+    }
+
+    .BoLogo{
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    html{
+        font-size: 12px;
+    }
+    .barRightP{
+        display: none;
+    }
+
+    .foto{
+        width: 60%;
+    }
+
+    .BoLogo{
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 992px){
+    html{
+        font-size: 12px;
+    }
+    .imgM{
+        width: 25px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .foto{
+        width: 80%;
+    }
+
+    .BoLogo{
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    
+}
+
+@media screen and (max-width: 1400px){
+    
+}

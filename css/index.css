@@ -1,139 +1,147 @@
-*{
-    font-family: 'Montserrat', sans-serif;
+* {
+  font-family: "Montserrat", sans-serif;
 }
 
-.textos h2{
-    color:#DC4100;
-    font-size: 3rem;
-    margin-bottom: 0;
+/* Textos - Primera sección - H2*/
+.textos h2 {
+  color: #dc4100;
+  font-size: 3rem;
+  margin-bottom: 0;
 }
 
-.textos p{
-    color: #3d3d3d;
-    font-size: 1rem;
+/* Textos - Primera sección - P*/
+.textos p {
+  color: #3d3d3d;
+  font-size: 1rem;
 }
 
-.centroF{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Centrado de imagen - Primera sección - IMG*/
+.centroF {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.centroT{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Centrado de textos - Primera sección */
+.centroT {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.textJ{
-    text-align: justify;
+.textJ {
+  text-align: justify;
 }
 
-.iconos{
-    width: 55px;
-    padding-right: 10px;
+/* Tamaño de los iconos */
+.iconos {
+  width: 55px;
+  padding-right: 10px;
 }
 
-.subtitulo{
-    color: #DC4100;
-    font-weight: 600;
-    font-size: 2rem;
+/* Caracteristicas subtitulos - H3 */
+.subtitulo {
+  color: #dc4100;
+  font-weight: 600;
+  font-size: 2rem;
 }
 
-
-
+/* Caracteristicas etiqutas a */
 #sin {
-    list-style: none;
-    padding-top: 2px;
+  list-style: none;
+  padding-top: 2px;
 }
 
-.listaHorizontal{
-    display: grid;
-    grid-gap: 16px;
-    padding: 16px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(250px, 2fr);
-    overflow-x: auto;
+/* Configuración lista horizontal */
+.listaHorizontal {
+  display: grid;
+  grid-gap: 16px;
+  padding: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(250px, 2fr);
+  overflow-x: auto;
 }
 
-.listaHorizontal div{
-    width: auto;
+.listaHorizontal div {
+  width: auto;
 }
 
-.listaHorizontal p{
-    font-size: 1.1rem;
-    display: flex;
-    align-items: center;
+.listaHorizontal p {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
 }
 
-.listaHorizontal img{
-    height: 50px;
-    padding-right: 17px;
-    padding-left: 17px;
+.listaHorizontal img {
+  height: 50px;
+  padding-right: 17px;
+  padding-left: 17px;
 }
 
-.mrginB{
-    margin-bottom: 5rem;
+/* Margen inferior de secciones */
+.mrginB {
+  margin-bottom: 5rem;
 }
 
-.boton{
-    width: auto;
-    height: 70px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+/* Caracteristicas de los botones - Portafolio - Animación*/
+.boton {
+  width: auto;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
-/* From uiverse.io by @alexmaracinaru */
+/* Botones Portafolio */
 .cta {
-    border: none;
-    background: none;
-  }
-  
-  .cta span {
-    padding-bottom: 7px;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding-right: 15px;
-    text-transform: uppercase;
-  }
-  
-  .cta svg {
-    transform: translateX(-8px);
-    transition: all 0.3s ease;
-  }
-  
-  .cta:hover svg {
-    transform: translateX(0);
-  }
-  
-  .cta:active svg {
-    transform: scale(0.9);
-  }
-  
-  .hover-underline-animation {
-    position: relative;
-    color: #3d3d3d;
-    padding-bottom: 20px;
-  }
-  
-  .hover-underline-animation:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: #DC4100;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-  }
-  
-  .cta:hover .hover-underline-animation:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-  }
+  border: none;
+  background: none;
+}
+
+.cta span {
+  padding-bottom: 7px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding-right: 15px;
+  text-transform: uppercase;
+}
+
+.cta svg {
+  transform: translateX(-8px);
+  transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateX(0);
+}
+
+.cta:active svg {
+  transform: scale(0.9);
+}
+
+.hover-underline-animation {
+  position: relative;
+  color: #3d3d3d;
+  padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #dc4100;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

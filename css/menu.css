@@ -6,15 +6,11 @@ body{
 
 /* Menu de la BARRA SUPERIOR */
 .menu{
-    background-color: white;
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
     align-items: center;
 }
 
-.menu div{
-    margin-left: 20px;
+#logoN{
+    height: 60px;
 }
 
 /* Hover y decoración de los botones del menu principal */

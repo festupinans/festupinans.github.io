@@ -1,61 +1,69 @@
-html{
-    font-size: 16px;
+html {
+  font-size: 16px;
 }
 
-@media screen and (max-width: 576px){
-    html{
-        font-size: 12px;
-    }
+@media screen and (max-width: 576px) {
+  html {
+    font-size: 12px;
+  }
 
-    .foto{
-        width: 40%;
-    }
+  /* Caracteristicas foto - Primera sección */
+  .foto {
+    width: 40%;
+  }
 
-    .BoLogo{
-        height: 30px;
-    }
+  /* Caracteristicas Logo - Footer */
+  .BoLogo {
+    height: 30px;
+  }
 }
 
-@media screen and (max-width: 768px){
-    html{
-        font-size: 12px;
-    }
-    .barRightP{
-        display: none;
-    }
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
 
-    .foto{
-        width: 60%;
-    }
+  /* Desactiva menu derecho de contactos */
+  .barRightP {
+    display: none;
+  }
 
-    .BoLogo{
-        height: 40px;
-    }
+  /* Caracteristicas foto - Primera sección */
+  .foto {
+    width: 60%;
+  }
+
+  /* Caracteristicas Logo - Footer */
+  .BoLogo {
+    height: 40px;
+  }
 }
 
-@media screen and (max-width: 992px){
-    html{
-        font-size: 12px;
-    }
-    .imgM{
-        width: 25px;
-        margin-top: 8px;
-        margin-bottom: 8px;
-    }
+@media screen and (max-width: 992px) {
+  html {
+    font-size: 12px;
+  }
 
-    .foto{
-        width: 80%;
-    }
+  /* Iconos barra de contacto */
+  .imgM {
+    width: 25px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
 
-    .BoLogo{
-        height: 60px;
-    }
+  /* Caracteristicas foto - Primera sección */
+  .foto {
+    width: 80%;
+  }
+
+  /* Caracteristicas Logo - Footer */
+  .BoLogo {
+    height: 60px;
+  }
 }
 
-@media screen and (max-width: 1200px){
-    
+@media screen and (max-width: 1200px) {
 }
 
-@media screen and (max-width: 1400px){
-    
+@media screen and (max-width: 1400px) {
 }

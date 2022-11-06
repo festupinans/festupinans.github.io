@@ -1,12 +1,12 @@
 /* Footer */
-footer{
+footer {
     background-color: #DC4100;
     color: white;
     z-index: 100;
 }
 
 /* Logo en el footer */
-.BoLogo{
+.BoLogo {
     height: 80px;
 }
 

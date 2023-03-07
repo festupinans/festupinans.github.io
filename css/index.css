@@ -2,6 +2,14 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.webgl {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  outline: none;
+}
+
 /* Textos - Primera sección - H2*/
 .textos h2 {
   color: #dc4100;

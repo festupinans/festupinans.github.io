@@ -7,9 +7,35 @@ html {
     font-size: 12px;
   }
 
+  .loadText h2 {
+    font-size: 30px;
+  }
+
+  .loadText p {
+    font-size: 16px;
+  }
+
   /* Caracteristicas foto - Primera sección */
   .foto {
     width: 40%;
+  }
+
+  /* Loader - Cambia las dimensionas del logo principal */
+  .loadIcon img {
+    width: 70vw;
+  }
+
+  /* Loader - Cambia las dimensionas de la barra de iconos */
+  .imgLogos img {
+    width: 30px;
+  }
+
+  #clickFuntion img {
+    width: 30px;
+  }
+
+  .loadImgContainer {
+    width: 90%;
   }
 
   /* Caracteristicas Logo - Footer */
@@ -18,30 +44,77 @@ html {
   }
 }
 
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+
 @media screen and (max-width: 768px) {
   html {
     font-size: 12px;
   }
 
-  /* Desactiva menu derecho de contactos */
-  .barRightP {
-    display: none;
+  .loadText h2 {
+    font-size: 30px;
   }
 
-  /* Caracteristicas foto - Primera sección */
-  .foto {
-    width: 60%;
+  .loadText p {
+    font-size: 16px;
+  }
+
+  /* Loader - Cambia las dimensionas del logo principal */
+  .loadIcon img {
+    width: 60vw;
+  }
+
+  /* Loader - Cambia las dimensionas de la barra de iconos */
+  .imgLogos img {
+    width: 50px;
+  }
+
+  #clickFuntion img {
+    width: 50px;
+  }
+
+  .loadImgContainer {
+    width: 80%;
   }
 
   /* Caracteristicas Logo - Footer */
   .BoLogo {
-    height: 40px;
+    height: 30px;
   }
 }
+
+/* Desactiva menu derecho de contactos */
+.barRightP {
+  display: none;
+}
+
+/* Caracteristicas foto - Primera sección */
+.foto {
+  width: 60%;
+}
+
+/* Caracteristicas Logo - Footer */
+.BoLogo {
+  height: 40px;
+}
+
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
 
 @media screen and (max-width: 992px) {
   html {
     font-size: 12px;
+  }
+
+  .loadText h2 {
+    font-size: 30px;
+  }
+
+  .loadText p {
+    font-size: 16px;
   }
 
   /* Iconos barra de contacto */
@@ -61,6 +134,10 @@ html {
     height: 60px;
   }
 }
+
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
 
 @media screen and (max-width: 1200px) {}
 

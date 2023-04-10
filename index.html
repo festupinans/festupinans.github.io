@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="css/index.css" />
   <link rel="stylesheet" href="css/footer.css" />
   <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/loader.css" />
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,55 +27,7 @@
 </head>
 
 <body>
-  <!-- Contenido de Loader Inicial -->
-  <div id="loader-container">
-    <div class="loadIcon">
-      <img src="./img/Logo_Francisco_Loader.png" alt="">
-    </div>
-
-    <div class="loadText">
-      <h2>BIENVENIDOS</h2>
-      <p>¿Continuamos?</p>
-    </div>
-
-    <div class="loadImgContainer">
-      <div class="imgLogos">
-        <a href="https://www.instagram.com/francisco.estupinan.s/?next=%2F" target="_blank">
-          <img src="img/Logo_Instagram_Blanco.png" alt="Instagram Logo Francisco Estupiñan Sanchez" />
-        </a>
-      </div>
-
-      <div class="imgLogos">
-        <a href="https://www.behance.net/francisestupi" target="_blank">
-          <img src="img/Logo_Behance_Blanco.png" alt="Behance Logo Francisco Estupiñan Sanchez" />
-        </a>
-      </div>
-
-      <div id="clickFuntion">
-        <a href="">
-          <img src="img/Click.png" alt="Icon click para continuar navigando en la pagina" />
-        </a>
-      </div>
-
-      <div class="imgLogos">
-        <a href="https://www.linkedin.com/in/festupinans/" target="_blank">
-          <img src="img/Logo_Lin_Blanco.png" alt="Linkedin Logo Francisco Estupiñan Sanchez" />
-        </a>
-      </div>
-
-      <div class="imgLogos">
-        <a href="https://github.com/festupinans" target="_blank">
-          <img src="img/Logo_Github_Blanco.png" alt="Github Logo Francisco Estupiñan Sanchez" />
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Contiene la información de ThreeJs -->
   <canvas class="webgl"></canvas>
-
-
   <!-- NavBar Principal -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
@@ -91,24 +42,22 @@
       </button>
 
       <!-- Menu NavBar -->
-      <div class="menuContent collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="menu navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"><button>Inicio</button></a>
+            <a class="nav-link active" aria-current="page" href="index.html"><button>Inicio</button></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="https://www.behance.net/francisestupi" target="_blank"><button>Diseño
-                Industrial</button></a>
+            <a class="nav-link" href="https://www.behance.net/francisestupi"><button>Diseño Industrial</button></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="https://github.com/festupinans" target="_blank"><button>Desarrollo
-                Web</button></a>
+            <a class="nav-link" href="https://github.com/festupinans"><button>Desarrollo Web</button></a>
           </li>
 
           <li class="nav-item">
-            <a id="contac" class="nav-link" href="#"><button>Contacto</button></a>
+            <a class="nav-link" href="#"><button>Contacto</button></a>
           </li>
         </ul>
       </div>
@@ -343,18 +292,7 @@
     crossorigin="anonymous"></script>
 
   <!-- Modulo js para threeJS   -->
-  <script type="module" src="./js/three.js"></script>
-
-  <!-- Importa archivo principal de JS -->
-  <script src="./js/main.js"></script>
-
-  <!-- Animación con GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-  <!-- Animación con GSAP - Oscilacion -->
-  <script>
-    gsap.fromTo(continiun, { y: "20%" }, { y: "-20%", duration: 1, repeat: -1, ease: "power1.inOut", yoyo: true })
-  </script>
-
+  <script type="module" src="./js/main.js"></script>
 </body>
 
 <footer>

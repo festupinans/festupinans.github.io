@@ -1,16 +1,27 @@
-body{
+body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     color: #3d3d3d;
+    overflow-x: hidden;
 }
 
 /* Menu de la BARRA SUPERIOR */
-.menu{
+.menu {
     align-items: center;
 }
 
-#logoN{
+#logoN {
     height: 60px;
+}
+
+.navbar {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    top: 1rem;
+}
+
+.menuContent {
+    padding-left: 3rem;
 }
 
 /* Hover y decoración de los botones del menu principal */
@@ -26,17 +37,17 @@ body{
     transition-duration: 400ms;
     transition-property: color;
 }
-  
+
 .menu button:hover {
     color: #DC4100;
 }
-  
+
 .menu button:focus:after,
 .menu button:hover:after {
     width: 100%;
     left: 0%;
 }
-  
+
 .menu button:after {
     content: "";
     pointer-events: none;
@@ -53,7 +64,7 @@ body{
 
 
 /* Contenedor - MENU DERECHO CONTACTOS */
-.barRightP{
+.barRightP {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -64,30 +75,30 @@ body{
 }
 
 /* DIVS - Contenedores - MENU DERECHO CONTACTOS */
-.barRight{
+.barRight {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 /* Linea superior - MENU DERECHO CONTACTOS */
-.line1{
+.line1 {
     background-color: grey;
     width: 2px;
     height: 50%;
 }
 
 /* Linea inferior - MENU DERECHO CONTACTOS */
-.line2{
+.line2 {
     background-color: grey;
     width: 2px;
     height: 18%;
 }
 
 /* Logos - MENU DERECHO CONTACTOS */
-.imgM{
+.imgM {
     width: 30px;
     margin-top: 10px;
     margin-bottom: 10px;

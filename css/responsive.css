@@ -42,6 +42,11 @@ html {
   .BoLogo {
     height: 30px;
   }
+
+  /* Desactiva menu derecho de contactos */
+  .barRightP {
+    display: none;
+  }
 }
 
 /* ----------------------------------------------------- */
@@ -83,12 +88,14 @@ html {
   .BoLogo {
     height: 30px;
   }
+
+  /* Desactiva menu derecho de contactos */
+  .barRightP {
+    display: none;
+  }
 }
 
-/* Desactiva menu derecho de contactos */
-.barRightP {
-  display: none;
-}
+
 
 /* Caracteristicas foto - Primera sección */
 .foto {

@@ -283,6 +283,7 @@
                         Float32Array.from(currentPositions);
 
                     // --- Fase 2: Reensamblaje ---
+                    isStable = true;
                     const obj2 = { t: 0 };
                     gsap.to(obj2, {
                         t: 1,
@@ -317,9 +318,7 @@
                             }
                             p.instanceMatrix.needsUpdate = true;
                         },
-                        onComplete: () => {
-                            isStable = true;
-                        },
+                        onComplete: () => {},
                     });
                 },
             });
@@ -333,6 +332,7 @@
 
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("click", onClick);
+    window.addEventListener("touchstart", onClick);
     window.addEventListener("resize", () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();

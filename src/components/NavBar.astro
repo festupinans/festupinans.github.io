@@ -1,0 +1,380 @@
+---
+// NavBar.astro - Navegación reactiva con scroll spy y menú móvil
+---
+
+<header id="navbar">
+    <nav>
+        <!-- Logo o nombre (opcional) -->
+        <div class="nav-brand">
+            <a href="#sobre-mi" class="brand-link">Portfolio</a>
+        </div>
+
+        <!-- Menú hamburguesa para móvil -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+
+        <!-- Links de navegación -->
+        <ul class="nav-menu" id="nav-menu">
+            <li>
+                <a
+                    href="#sobre-mi"
+                    class="nav-link active"
+                    data-section="sobre-mi">Sobre mí</a
+                >
+            </li>
+            <li>
+                <a
+                    href="#experiencia"
+                    class="nav-link"
+                    data-section="experiencia">Experiencia</a
+                >
+            </li>
+            <li>
+                <a href="#educacion" class="nav-link" data-section="educacion"
+                    >Educación</a
+                >
+            </li>
+            <li>
+                <a href="#proyectos" class="nav-link" data-section="proyectos"
+                    >Proyectos</a
+                >
+            </li>
+            <li>
+                <a href="#contacto" class="nav-link" data-section="contacto"
+                    >Contacto</a
+                >
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<style>
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+        background: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    nav {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 2rem;
+    }
+
+    .nav-brand {
+        display: none;
+    }
+
+    .brand-link {
+        color: #ff3914;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.2rem;
+    }
+
+    .menu-toggle {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 101;
+    }
+
+    .menu-toggle:hover {
+        background: rgba(255, 57, 20, 0.1);
+        border-color: rgba(255, 57, 20, 0.3);
+    }
+
+    .hamburger-line {
+        width: 22px;
+        height: 2px;
+        background: #fff;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    /* Animación hamburger a X */
+    .menu-toggle.active .hamburger-line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .hamburger-line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .nav-menu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 0.5rem;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    .nav-link {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .nav-link:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link.active {
+        color: #ff3914;
+        background: rgba(255, 57, 20, 0.1);
+    }
+
+    .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background: #ff3914;
+        border-radius: 2px;
+    }
+
+    /* Responsive - Tablet */
+    @media (max-width: 800px) {
+        nav {
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: block;
+        }
+
+        .menu-toggle {
+            display: flex;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-menu.open {
+            right: 0;
+        }
+
+        .nav-menu li {
+            width: 100%;
+        }
+
+        .nav-link {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 12px;
+        }
+
+        .nav-link.active::after {
+            display: none;
+        }
+
+        .nav-link.active {
+            background: rgba(255, 57, 20, 0.15);
+            border: 1px solid rgba(255, 57, 20, 0.3);
+        }
+    }
+
+    /* Overlay para cerrar menú */
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Responsive - Móvil pequeño */
+    @media (max-width: 400px) {
+        nav {
+            padding: 0 1rem;
+        }
+
+        .nav-menu {
+            width: 100%;
+            right: -100%;
+        }
+
+        .nav-link {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<script>
+    // Elementos del DOM
+    const menuToggle = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("nav-menu");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section[id]");
+    const navbar = document.getElementById("navbar");
+
+    // Crear overlay para cerrar menú
+    const overlay = document.createElement("div");
+    overlay.className = "menu-overlay";
+    document.body.appendChild(overlay);
+
+    // Toggle del menú móvil
+    function toggleMenu() {
+        menuToggle?.classList.toggle("active");
+        navMenu?.classList.toggle("open");
+        overlay.classList.toggle("active");
+        document.body.style.overflow = navMenu?.classList.contains("open")
+            ? "hidden"
+            : "";
+    }
+
+    // Cerrar menú
+    function closeMenu() {
+        menuToggle?.classList.remove("active");
+        navMenu?.classList.remove("open");
+        overlay.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    // Event listeners
+    menuToggle?.addEventListener("click", toggleMenu);
+    overlay.addEventListener("click", closeMenu);
+
+    // Cerrar menú al hacer click en un link
+    navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            closeMenu();
+
+            const targetId = link.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                const offsetTop = (targetSection as HTMLElement).offsetTop - 70;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: "smooth",
+                });
+            }
+        });
+    });
+
+    // Scroll Spy: detectar sección activa
+    function updateActiveLink() {
+        const scrollPosition = window.scrollY + 100;
+
+        sections.forEach((section) => {
+            const sectionTop = (section as HTMLElement).offsetTop;
+            const sectionHeight = section.clientHeight;
+            const sectionId = section.getAttribute("id");
+
+            if (
+                scrollPosition >= sectionTop &&
+                scrollPosition < sectionTop + sectionHeight
+            ) {
+                navLinks.forEach((link) => {
+                    link.classList.remove("active");
+                    if (
+                        (link as HTMLAnchorElement).dataset.section ===
+                        sectionId
+                    ) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+        });
+
+        // Añadir clase scrolled al navbar
+        if (window.scrollY > 50) {
+            navbar?.classList.add("scrolled");
+        } else {
+            navbar?.classList.remove("scrolled");
+        }
+    }
+
+    // Cerrar menú con Escape
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeMenu();
+        }
+    });
+
+    // Listeners
+    window.addEventListener("scroll", updateActiveLink);
+    window.addEventListener("load", updateActiveLink);
+
+    // Cerrar menú si se redimensiona a desktop
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 800) {
+            closeMenu();
+        }
+    });
+</script>

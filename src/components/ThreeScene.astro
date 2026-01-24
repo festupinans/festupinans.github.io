@@ -1,0 +1,461 @@
+<script>
+    import * as THREE from "three";
+    import gsap from "gsap";
+    import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+    import { MeshSurfaceSampler } from "three/examples/jsm/math/MeshSurfaceSampler.js";
+    import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+
+    // --- Configuration ---
+    const PARTICLE_COUNT = 1000;
+    const PARTICLE_SIZE1 = 0.03;
+    const PARTICLE_SIZE2 = 0.02;
+    const REACTOR_RADIUS = 2.5;
+    const COLORS = [0xffffff, 0xff00ff, 0xff3914]; // Base colors
+
+    // --- Scene Setup ---
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+    );
+    camera.position.z = 6;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+
+    // OrbitControls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.enableZoom = true;
+    controls.autoRotate = false; // We handle rotation manually
+
+    const container = document.getElementById("webgl");
+    if (container) {
+        container.appendChild(renderer.domElement);
+    }
+
+    // --- Groups for Rotation ---
+    // We want particles and "reactor" to rotate in opposite directions.
+    // We'll put particles in one group and maybe a core or just the camera logic to feel like counter-rotation.
+    // Actually, let's make the entire particle system rotate one way, and individual particles rotate (if they were meshes) or
+    // simply have a secondary layer.
+    // The request says: "Particulas y el reactor quiero que esten girando y dando vueltas en sentidos contrarios entre sí."
+    // Let's create two Groups of particles for visual complexity, rotating opposite ways.
+    // Wrap them in a main group for mouse interaction tilting to avoid conflict with auto-rotation
+    const mainGroup = new THREE.Group();
+    scene.add(mainGroup);
+
+    const group1 = new THREE.Group();
+    const group2 = new THREE.Group();
+    // scene.add(group1); // Removed: adding to mainGroup instead
+    // scene.add(group2); // Removed: adding to mainGroup instead
+    mainGroup.add(group1);
+    mainGroup.add(group2);
+
+    // --- Dynamic Geometry Logic ---
+    // --- Dynamic Geometry Logic ---
+    const geometries = [
+        new THREE.SphereGeometry(3, 32, 16),
+        new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16),
+        new THREE.TetrahedronGeometry(3),
+        new THREE.OctahedronGeometry(3),
+        new THREE.IcosahedronGeometry(3),
+        new THREE.DodecahedronGeometry(3),
+        new THREE.CylinderGeometry(3, 1, 2, 32),
+        new THREE.ConeGeometry(3, 2, 32),
+        new THREE.CapsuleGeometry(2.5, 2.5, 4, 8),
+        new THREE.BoxGeometry(3.5, 3.5, 3.5),
+    ];
+
+    function sampleGeometry(
+        geometry: THREE.BufferGeometry,
+        count: number,
+    ): Float32Array {
+        let mesh;
+        if (geometry instanceof THREE.BufferGeometry) {
+            mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial());
+        } else {
+            return new Float32Array(count * 3);
+        }
+
+        const sampler = new MeshSurfaceSampler(mesh).build();
+        const particles = new Float32Array(count * 3);
+        const tempPosition = new THREE.Vector3();
+
+        for (let i = 0; i < count; i++) {
+            sampler.sample(tempPosition);
+            particles[i * 3] = tempPosition.x;
+            particles[i * 3 + 1] = tempPosition.y;
+            particles[i * 3 + 2] = tempPosition.z;
+        }
+
+        return particles;
+    }
+
+    // Function to load external models
+    function loadModel(url: string) {
+        const loader = new GLTFLoader();
+        loader.load(url, (gltf) => {
+            gltf.scene.traverse((child) => {
+                if ((child as THREE.Mesh).isMesh) {
+                    const mesh = child as THREE.Mesh;
+                    [particles1, particles2].forEach((p) => {
+                        // Verificación de seguridad: si p existe y tiene userData.targets
+                        if (p && p.userData && p.userData.targets) {
+                            const count = p.count; // En InstancedMesh usamos .count
+                            const sampled = sampleGeometry(
+                                mesh.geometry,
+                                count,
+                            );
+                            p.userData.targets.push(sampled);
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    // Load the requested test model
+    loadModel("/Susan.glb");
+
+    // --- Particle System Functions ---
+
+    // Objeto auxiliar para calcular las matrices de cada instancia sin crear miles de objetos
+    const dummy = new THREE.Object3D();
+
+    function createParticleSystem(
+        group: THREE.Group,
+        count: number,
+        color: number,
+        size: number,
+    ) {
+        // Definimos la geometría del octaedro (el "mini" objeto)
+        const geometry = new THREE.OctahedronGeometry(size);
+
+        // Usamos MeshPhongMaterial para que reaccione a la luz
+        const material = new THREE.MeshPhongMaterial({
+            color: color,
+            emissive: color,
+            transparent: true,
+            opacity: 0.9,
+            shininess: 100,
+        });
+
+        // Creamos la InstancedMesh
+        const mesh = new THREE.InstancedMesh(geometry, material, count);
+
+        // Muestreo inicial para posicionar las instancias
+        const initialPositions = sampleGeometry(geometries[0], count);
+
+        for (let i = 0; i < count; i++) {
+            dummy.position.set(
+                initialPositions[i * 3],
+                initialPositions[i * 3 + 1],
+                initialPositions[i * 3 + 2],
+            );
+            dummy.updateMatrix();
+            mesh.setMatrixAt(i, dummy.matrix);
+        }
+
+        // Guardamos los objetivos de formas igual que antes
+        const targets = geometries.map((geo) => sampleGeometry(geo, count));
+
+        mesh.userData = {
+            targets: targets,
+            currentShape: 0,
+            positions: initialPositions, // Guardamos las posiciones actuales para el lerp
+        };
+
+        group.add(mesh);
+        return mesh;
+    }
+
+    const particles1 = createParticleSystem(
+        group1,
+        PARTICLE_COUNT,
+        COLORS[2],
+        PARTICLE_SIZE1,
+    );
+    const particles2 = createParticleSystem(
+        group2,
+        PARTICLE_COUNT / 2,
+        COLORS[0],
+        PARTICLE_SIZE2,
+    ); // Inner/Counter system
+
+    // --- State & Animation Logic ---
+    let rotSpeed = 0.002;
+    let isStable = true;
+    let currentShapeIndex = 0;
+
+    // --- Interaction ---
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let targetRotX = 0;
+    let targetRotY = 0;
+
+    function onMouseMove(event: MouseEvent) {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        targetRotX = mouse.y * 0.5;
+        targetRotY = mouse.x * 0.5;
+    }
+
+    function explodeAndReassemble() {
+        isStable = false;
+
+        // Actualizamos el índice una sola vez para mantener sincronizados ambos sistemas
+        const totalShapes = particles1.userData.targets.length;
+        currentShapeIndex = (currentShapeIndex + 1) % totalShapes;
+
+        [particles1, particles2].forEach((p) => {
+            const count = p.count;
+            const currentPositions = p.userData.positions;
+            const startPositions = Float32Array.from(currentPositions);
+
+            // Creamos destinos de explosión (aleatorios hacia afuera)
+            const scatterPositions = new Float32Array(currentPositions.length);
+            for (let i = 0; i < currentPositions.length; i += 3) {
+                const dir = new THREE.Vector3(
+                    startPositions[i],
+                    startPositions[i + 1],
+                    startPositions[i + 2],
+                )
+                    .normalize()
+                    .multiplyScalar(5 + Math.random() * 5);
+
+                scatterPositions[i] = dir.x;
+                scatterPositions[i + 1] = dir.y;
+                scatterPositions[i + 2] = dir.z;
+            }
+
+            // --- Fase 1: Explosión ---
+            const obj = { t: 0 };
+            gsap.to(obj, {
+                t: 1,
+                duration: 0.8,
+                ease: "expo.out",
+                onUpdate: () => {
+                    for (let i = 0; i < count; i++) {
+                        const i3 = i * 3;
+                        const x =
+                            startPositions[i3] +
+                            (scatterPositions[i3] - startPositions[i3]) * obj.t;
+                        const y =
+                            startPositions[i3 + 1] +
+                            (scatterPositions[i3 + 1] -
+                                startPositions[i3 + 1]) *
+                                obj.t;
+                        const z =
+                            startPositions[i3 + 2] +
+                            (scatterPositions[i3 + 2] -
+                                startPositions[i3 + 2]) *
+                                obj.t;
+
+                        dummy.position.set(x, y, z);
+                        dummy.rotation.set(
+                            Math.random(),
+                            Math.random(),
+                            Math.random(),
+                        );
+                        dummy.updateMatrix();
+                        p.setMatrixAt(i, dummy.matrix);
+
+                        currentPositions[i3] = x;
+                        currentPositions[i3 + 1] = y;
+                        currentPositions[i3 + 2] = z;
+                    }
+                    p.instanceMatrix.needsUpdate = true;
+                },
+                onComplete: () => {
+                    // Usamos el índice ya actualizado
+                    const targetPositions =
+                        p.userData.targets[currentShapeIndex];
+                    const scatteredPositions =
+                        Float32Array.from(currentPositions);
+
+                    // --- Fase 2: Reensamblaje ---
+                    const obj2 = { t: 0 };
+                    gsap.to(obj2, {
+                        t: 1,
+                        duration: 1.2,
+                        ease: "elastic.out(1, 0.3)",
+                        onUpdate: () => {
+                            for (let i = 0; i < count; i++) {
+                                const i3 = i * 3;
+                                const x =
+                                    scatteredPositions[i3] +
+                                    (targetPositions[i3] -
+                                        scatteredPositions[i3]) *
+                                        obj2.t;
+                                const y =
+                                    scatteredPositions[i3 + 1] +
+                                    (targetPositions[i3 + 1] -
+                                        scatteredPositions[i3 + 1]) *
+                                        obj2.t;
+                                const z =
+                                    scatteredPositions[i3 + 2] +
+                                    (targetPositions[i3 + 2] -
+                                        scatteredPositions[i3 + 2]) *
+                                        obj2.t;
+
+                                dummy.position.set(x, y, z);
+                                dummy.updateMatrix();
+                                p.setMatrixAt(i, dummy.matrix);
+
+                                currentPositions[i3] = x;
+                                currentPositions[i3 + 1] = y;
+                                currentPositions[i3 + 2] = z;
+                            }
+                            p.instanceMatrix.needsUpdate = true;
+                        },
+                        onComplete: () => {
+                            isStable = true;
+                        },
+                    });
+                },
+            });
+        });
+    }
+
+    function onClick() {
+        if (!isStable) return;
+        explodeAndReassemble();
+    }
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("click", onClick);
+    window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // --- Animation Loop ---
+    const clock = new THREE.Clock();
+
+    function animate() {
+        const time = clock.getElapsedTime();
+
+        // 1. Group Rotation (Base Movement)
+        group1.rotation.y += rotSpeed;
+        group1.rotation.z += rotSpeed * 0.5;
+
+        // Counter rotation for group 2
+        group2.rotation.y -= rotSpeed * 1.5;
+        group2.rotation.z -= rotSpeed * 0.2;
+
+        // 2. Hover Effect (Disturbance)
+        // Convert mouse screen pos to world ray
+        raycaster.setFromCamera(mouse, camera);
+        const intersectPoint = new THREE.Vector3();
+        raycaster.ray.at(5, intersectPoint); // Approximate depth
+
+        if (isStable) {
+            // Repulsion Effect
+            raycaster.setFromCamera(mouse, camera);
+
+            // Ensure matrices are up to date
+            group1.updateMatrixWorld();
+            group2.updateMatrixWorld();
+
+            [particles1, particles2].forEach((p) => {
+                const positions = p.userData.positions;
+                const count = p.count;
+
+                // Transform ray to local space of the particle system
+                // This avoids transforming thousands of particle positions to world space
+                const inverseMatrix = new THREE.Matrix4()
+                    .copy(p.matrixWorld)
+                    .invert();
+                const localRay = new THREE.Ray()
+                    .copy(raycaster.ray)
+                    .applyMatrix4(inverseMatrix);
+
+                const repulsionRadius = 0.4; // Radius of influence
+                const repulsionForce = 0.5; // Max push distance
+
+                for (let i = 0; i < count; i++) {
+                    const i3 = i * 3;
+                    const ox = positions[i3];
+                    const oy = positions[i3 + 1];
+                    const oz = positions[i3 + 2];
+
+                    const pPos = new THREE.Vector3(ox, oy, oz);
+
+                    // Optimization: Check distance squared first
+                    const distSq = localRay.distanceSqToPoint(pPos);
+
+                    let x = ox,
+                        y = oy,
+                        z = oz;
+
+                    if (distSq < repulsionRadius * repulsionRadius) {
+                        const closestPoint = new THREE.Vector3();
+                        localRay.closestPointToPoint(pPos, closestPoint);
+
+                        // Direction from ray to particle
+                        const dir = new THREE.Vector3().subVectors(
+                            pPos,
+                            closestPoint,
+                        );
+                        const dist = dir.length();
+
+                        if (dist > 0.0001) {
+                            // Calculate push strength (stronger when closer)
+                            const strength =
+                                (1 - dist / repulsionRadius) * repulsionForce;
+                            dir.normalize().multiplyScalar(strength);
+
+                            x += dir.x;
+                            y += dir.y;
+                            z += dir.z;
+                        }
+                    }
+
+                    dummy.position.set(x, y, z);
+                    // Keep the organic rotation based on position
+                    dummy.rotation.set(x * 0.5, y * 0.5, z * 0.5);
+                    dummy.updateMatrix();
+                    p.setMatrixAt(i, dummy.matrix);
+                }
+                p.instanceMatrix.needsUpdate = true;
+            });
+
+            // Simple interaction: Tilt scene based on mouse
+            // We apply this to the mainGroup so it doesn't conflict with group1/group2 auto-rotation
+            // Using a lower factor (0.05) to eliminate jumps and ensure smoothness
+            mainGroup.rotation.x +=
+                (mouse.y * 0.5 - mainGroup.rotation.x) * 0.05;
+            mainGroup.rotation.y +=
+                (mouse.x * 0.5 - mainGroup.rotation.y) * 0.05;
+        }
+
+        controls.update();
+        renderer.render(scene, camera);
+    }
+
+    renderer.setAnimationLoop(animate);
+</script>
+
+<div id="webgl"></div>
+
+<style>
+    #webgl {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+        z-index: -10;
+    }
+</style>

@@ -1,3 +1,7 @@
+---
+const baseUrl = import.meta.env.BASE_URL;
+---
+
 <script>
     import * as THREE from "three";
     import gsap from "gsap";
@@ -123,7 +127,10 @@
     }
 
     // Load the requested test model
-    loadModel("/Susan.glb");
+    // Obtener BASE_URL del data-attribute para compatibilidad con GitHub Pages
+    const webglContainer = document.getElementById("webgl");
+    const baseUrl = webglContainer?.dataset.baseUrl || "/";
+    loadModel(`${baseUrl}Susan.glb`);
 
     // --- Particle System Functions ---
 
@@ -446,7 +453,7 @@
     renderer.setAnimationLoop(animate);
 </script>
 
-<div id="webgl"></div>
+<div id="webgl" data-base-url={baseUrl}></div>
 
 <style>
     #webgl {

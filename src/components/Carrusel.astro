@@ -1,5 +1,7 @@
 ---
 // StackCarrusel.astro – Carrusel reutilizable, recibe elementos por prop
+import TechTag from './TechTag.astro';
+
 export interface Props {
   items: string[];
   tagClass?: string;
@@ -12,13 +14,13 @@ const { items, tagClass, ariaLabel = "Carrusel de elementos" } = Astro.props;
   <div class="tech-carousel" tabindex="0">
     <div class="carousel-track">
       {items.map(tag => (
-        <span class={"tech-tag" + (tagClass ? ` ${tagClass}` : "")}>{tag}</span>
+        <TechTag name={tag} size="lg" class={tagClass} />
       ))}
     </div>
     <!-- Duplicamos el track para crear la ilusión de scroll infinito sin cortes -->
     <div class="carousel-track" aria-hidden="true">
       {items.map(tag => (
-        <span class={"tech-tag" + (tagClass ? ` ${tagClass}` : "")}>{tag}</span>
+        <TechTag name={tag} size="lg" class={tagClass} />
       ))}
     </div>
   </div>
@@ -53,28 +55,11 @@ const { items, tagClass, ariaLabel = "Carrusel de elementos" } = Astro.props;
     min-width: 100%;
     width: max-content;
     will-change: transform;
-    animation: scroll-carousel 25s linear infinite; /* Controla la velocidad aquí (mayor s = más lento) */
+    animation: scroll-carousel 75s linear infinite; /* Controla la velocidad aquí (mayor s = más lento) */
 }
 @keyframes scroll-carousel {
     0% { transform: translateX(0); }
     100% { transform: translateX(-100%); }
-}
-.tech-tag {
-    padding: 0.6rem 1.2rem;
-    background: rgba(255, 57, 20, 0.15);
-    border: 1px solid rgba(255, 57, 20, 0.4);
-    border-radius: 25px;
-    color: #ff3914;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    white-space: nowrap;
-}
-.tech-tag:hover {
-    background: rgba(255, 57, 20, 0.25);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 57, 20, 0.2);
 }
 @media (max-width: 768px) {
     .tech-carousel-wrapper { max-width: 95vw; }

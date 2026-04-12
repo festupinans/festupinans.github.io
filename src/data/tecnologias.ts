@@ -1,0 +1,37 @@
+export const TECNOLOGIAS = {
+    UNITY: "Unity",
+    WEBXR: "WebXR",
+    THREEJS: "Three.js",
+    IA: "IA",
+    UNREAL_ENGINE: "Unreal Engine",
+    JAVASCRIPT: "JavaScript",
+    TYPESCRIPT: "TypeScript",
+    REACT: "React",
+    NODEJS: "Node.js",
+    MONGODB: "MongoDB",
+    WEBGL: "WebGL",
+    REACT_NATIVE: "React Native",
+    FIREBASE: "Firebase",
+    REDUX: "Redux",
+    NEXTJS: "Next.js",
+    STRIPE: "Stripe",
+    POSTGRESQL: "PostgreSQL",
+    ILLUSTRATOR: "Illustrator",
+    PHOTOSHOP: "Photoshop",
+    SKETCHUP: "SketchUp",
+    LAYOUT: "LayOut",
+    ASTRO: "Astro",
+    TAILWIND: "Tailwind CSS",
+    HTML: "HTML",
+    CSS: "CSS",
+    PYTHON: "Python",
+    C_SHARP: "C#",
+    AR: "Realidad Aumentada",
+    VR: "Realidad Virtual",
+    GAMEDEV: "Desarrollo de Juegos",
+    WEB: "Web",
+    BLENDER: "Blender"
+} as const;
+
+// Tipo extraído del objeto para usarlo en TypeScript
+export type Tecnologia = typeof TECNOLOGIAS[keyof typeof TECNOLOGIAS];

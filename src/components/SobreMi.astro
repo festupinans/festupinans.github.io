@@ -1,5 +1,6 @@
 ---
 import Carrusel from "./Carrusel.astro";
+import { TECNOLOGIAS } from "../data/tecnologias";
 ---
 
 <section id="sobre-mi" class="section">
@@ -22,12 +23,8 @@ import Carrusel from "./Carrusel.astro";
                 </p>
 
                 <!-- Stack tecnológico destacado como carrusel reutilizable -->
-                <Carrusel
-                    items={[
-                        'Unity', 'Unreal Engine', 'Realidad Aumentada', 'Realidad Virtual',
-                        'Desarrollo de Juegos', 'Three.js', 'Web', 'C#', 'JavaScript',
-                        'Python', 'Blender',
-                    ]}
+<Carrusel
+                    items={Object.values(TECNOLOGIAS)}
                     ariaLabel="Stack tecnológico destacado"
                 />
                 

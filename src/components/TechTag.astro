@@ -1,0 +1,66 @@
+---
+import type { Tecnologia } from '../data/tecnologias';
+
+export interface Props {
+    name: string | Tecnologia;
+    size?: 'sm' | 'md' | 'lg';
+    class?: string;
+}
+
+const { name, size = 'sm', class: className = '' } = Astro.props;
+
+const sizeClass = {
+    sm: 'tech-tag-sm', // Usado en Proyectos
+    md: 'tech-tag-md', // Usado en Experiencia
+    lg: 'tech-tag-lg'  // Usado en Carrusel
+}[size];
+
+// Variables CSS customizables según variante o usamos una versión coherente con la paleta actual
+---
+<span class={`tech-tag ${sizeClass} ${className}`}>{name}</span>
+
+<style>
+    .tech-tag {
+        display: inline-block;
+        background: rgba(255, 57, 20, 0.15);
+        border: 1px solid rgba(255, 57, 20, 0.3);
+        color: #ff3914;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        font-weight: 500;
+    }
+
+    /* Variante Pequeña (Proyectos) */
+    .tech-tag-sm {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 12px;
+    }
+
+    /* Variante Mediana (Experiencia) */
+    .tech-tag-md {
+        font-size: 0.8rem;
+        padding: 0.35rem 0.9rem;
+        border-radius: 15px;
+        /* En la tarjeta antigua de experiencia era blanco translúcido. */
+        /* Sobrescribimos el color aquí para respetar el diseño de Experiencia */
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Variante Grande (Carrusel) */
+    .tech-tag-lg {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        border-radius: 25px;
+        backdrop-filter: blur(10px);
+        border-color: rgba(255, 57, 20, 0.4);
+    }
+
+    .tech-tag-lg:hover {
+        background: rgba(255, 57, 20, 0.25);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 57, 20, 0.2);
+    }
+</style>

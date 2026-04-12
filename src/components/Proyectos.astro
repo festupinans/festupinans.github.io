@@ -2,7 +2,33 @@
 // Proyectos.astro - Grid de proyectos destacados con glassmorphism
 import TechTag from "./TechTag.astro";
 import { TECNOLOGIAS } from "../data/tecnologias";
-import { proyectos } from "../data/proyectos";
+import type { Empresa } from "../data/empresas";
+import { proyectos, type Proyecto } from "../data/proyectos";
+import Carrusel from "./Carrusel.astro";
+import EmpresaButton from "./EmpresaButton.astro";
+import QRCode from "qrcode";
+
+// Pre-generar los códigos QR para los proyectos de RA
+const qrCodes = await Promise.all(
+  proyectos.map(async (p) => {
+    if (p.esWebAR && p.enlaceAR) {
+      try {
+        return await QRCode.toDataURL(p.enlaceAR, {
+          width: 300,
+          margin: 2,
+          color: {
+            dark: "#000000ff",
+            light: "#ffffffff",
+          },
+        });
+      } catch (err) {
+        console.error("Error generando QR", err);
+        return null;
+      }
+    }
+    return null;
+  })
+);
 ---
 
 <section id="proyectos" class="section">
@@ -15,17 +41,7 @@ import { proyectos } from "../data/proyectos";
       <div class="projects-grid">
         {
           proyectos.map(
-            (
-              proyecto: {
-                titulo: string;
-                descripcion: string;
-                imagen: string;
-                tecnologias: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS][];
-                github?: string;
-                demo?: string | null;
-              },
-              index: number,
-            ) => (
+            (proyecto: Proyecto, index: number) => (
               <article
                 class="project-card project-card-clickable"
                 data-target={`project-modal-${index}`}
@@ -38,7 +54,7 @@ import { proyectos } from "../data/proyectos";
                     loading="lazy"
                   />
                   <div class="project-overlay">
-                    <span class="view-more-text">Ver más</span>
+                    <span class="view-more-text">{proyecto.esWebAR ? 'Ver RA' : 'Ver más'}</span>
                     <div class="project-links">
                       {proyecto.github && (
                         <a
@@ -91,14 +107,21 @@ import { proyectos } from "../data/proyectos";
                 </div>
                 <div class="project-content">
                   <h3 class="project-title">{proyecto.titulo}</h3>
+                  {proyecto.empresa && (
+                    <EmpresaButton empresa={proyecto.empresa} />
+                  )}
                   <p class="project-description">{proyecto.descripcion}</p>
                   <div class="project-techs">
-                    {proyecto.tecnologias.map(
-                      (
-                        tech: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS],
-                      ) => (
-                        <TechTag name={tech} size="sm" />
-                      ),
+                    {proyecto.tecnologias.length > 4 ? (
+                      <Carrusel items={proyecto.tecnologias} size="sm" tagClass="tech-tag-card" ariaLabel={`Tecnologías del proyecto ${proyecto.titulo}`} />
+                    ) : (
+                      proyecto.tecnologias.map(
+                        (
+                          tech: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS],
+                        ) => (
+                          <TechTag name={tech} size="sm" />
+                        ),
+                      )
                     )}
                   </div>
                 </div>
@@ -111,139 +134,180 @@ import { proyectos } from "../data/proyectos";
       <!-- Modales (renderizados fuera del grid para no romper layout y scopes) -->
       {
         proyectos.map(
-          (
-            proyecto: {
-              titulo: string;
-              descripcion: string;
-              descripcionExtensa?: string;
-              imagen: string;
-              imagenes?: string[];
-              tecnologias: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS][];
-              github?: string;
-              demo?: string | null;
-            },
-            index: number,
-          ) => (
-            <dialog id={`project-modal-${index}`} class="project-modal">
+          (proyecto: Proyecto, index: number) => (
+            <dialog id={`project-modal-${index}`} class={`project-modal ${proyecto.esWebAR ? 'ar-modal' : ''}`}>
               <div class="modal-glass">
                 <button class="close-modal-btn" aria-label="Cerrar modal">
                   &times;
                 </button>
-                <div class="modal-left">
-                  <h3 class="modal-title">{proyecto.titulo}</h3>
-                  <p class="modal-description">{proyecto.descripcion}</p>
-                  <p class="modal-extended-description">
-                    {proyecto.descripcionExtensa}
-                  </p>
-                  <div class="modal-techs">
-                    {proyecto.tecnologias.map(
-                      (
-                        tech: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS],
-                      ) => (
-                        <TechTag name={tech} size="md" />
-                      ),
+
+                <div class="modal-standard-view">
+                  <div class="modal-left">
+                    <h3 class="modal-title">{proyecto.titulo}</h3>
+                    {proyecto.empresa && (
+                      <EmpresaButton empresa={proyecto.empresa} />
                     )}
+                    <p class="modal-description">{proyecto.descripcion}</p>
+                    <p class="modal-extended-description">
+                      {proyecto.descripcionExtensa}
+                    </p>
+                    <div class="modal-techs">
+                      {proyecto.tecnologias.length > 4 ? (
+                        <Carrusel items={proyecto.tecnologias} size="sm" tagClass="tech-tag-modal" ariaLabel={`Tecnologías del proyecto ${proyecto.titulo}`} />
+                      ) : (
+                        proyecto.tecnologias.map(
+                          (
+                            tech: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS],
+                          ) => (
+                            <TechTag name={tech} size="sm" />
+                          ),
+                        )
+                      )}
+                    </div>
+                    <div class="modal-actions">
+                      {proyecto.esWebAR && (
+                        <button class="btn btn-primary show-ar-btn">
+                          Ver RA
+                        </button>
+                      )}
+                      {proyecto.github && (
+                        <a
+                          href={proyecto.github}
+                          class="btn btn-outline"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          Ver Repositorio
+                        </a>
+                      )}
+                      {proyecto.demo && (
+                        <a
+                          href={proyecto.demo}
+                          class="btn btn-primary"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          Ver Demo
+                        </a>
+                      )}
+                    </div>
                   </div>
-                  <div class="modal-actions">
-                    {proyecto.github && (
-                      <a
-                        href={proyecto.github}
-                        class="btn btn-outline"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        Ver Repositorio
-                      </a>
-                    )}
-                    {proyecto.demo && (
-                      <a
-                        href={proyecto.demo}
-                        class="btn btn-primary"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        Ver Demo
-                      </a>
-                    )}
+                  <div class="modal-right">
+                    <div
+                      class="carousel-container"
+                      data-carousel={`carousel-${index}`}
+                    >
+                      <div class="carousel-track">
+                        {proyecto.imagenes?.map((img: string, i: number) => (
+                          <div
+                            class={`carousel-slide ${i === 0 ? "active" : ""}`}
+                            data-index={i}
+                          >
+                            <img
+                              src={img}
+                              alt={`Imagen del proyecto ${proyecto.titulo} - ${i + 1}`}
+                              class="carousel-image zoomable-img"
+                              loading="lazy"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      {(proyecto.imagenes?.length || 0) > 1 &&
+                        proyecto.imagenes && (
+                          <>
+                            <button
+                              class="carousel-btn prev"
+                              aria-label="Imagen anterior"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <polyline points="15 18 9 12 15 6" />
+                              </svg>
+                            </button>
+                            <button
+                              class="carousel-btn next"
+                              aria-label="Siguiente imagen"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              >
+                                <polyline points="9 18 15 12 9 6" />
+                              </svg>
+                            </button>
+                            <div class="carousel-dots">
+                              {proyecto.imagenes.map((_: string, i: number) => (
+                                <button
+                                  class={`carousel-dot ${i === 0 ? "active" : ""}`}
+                                  aria-label={`Ir a imagen ${i + 1}`}
+                                  data-target={i}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                    </div>
                   </div>
                 </div>
-                <div class="modal-right">
-                  <div
-                    class="carousel-container"
-                    data-carousel={`carousel-${index}`}
-                  >
-                    <div class="carousel-track">
-                      {proyecto.imagenes?.map((img: string, i: number) => (
-                        <div
-                          class={`carousel-slide ${i === 0 ? "active" : ""}`}
-                          data-index={i}
-                        >
-                          <img
-                            src={img}
-                            alt={`Imagen del proyecto ${proyecto.titulo} - ${i + 1}`}
-                            class="carousel-image"
-                            loading="lazy"
-                          />
+
+                {proyecto.esWebAR && (
+                  <div class="ar-container" style="display: none;">
+                    <button class="btn btn-outline back-to-info-btn">
+                      &larr; Volver a la información
+                    </button>
+                    <h3 class="ar-title">Escanea para vivir la experiencia RA</h3>
+                    <p class="ar-subtitle">Sigue estos pasos desde tu celular:</p>
+                    
+                    <div class="ar-content-wrapper">
+                      <div class="ar-qr-section">
+                        <span class="ar-step-number">1</span>
+                        <p class="ar-step-text">Abre la cámara de tu celular y escanea este código QR</p>
+                        <div class="ar-qr-box">
+                          {qrCodes[index] && <img src={qrCodes[index]} alt={`QR code para ${proyecto.titulo}`} class="ar-qr-img zoomable-img" />}
                         </div>
-                      ))}
-                    </div>
-                    {(proyecto.imagenes?.length || 0) > 1 &&
-                      proyecto.imagenes && (
+                      </div>
+
+                      {proyecto.marcadorAR && (
                         <>
-                          <button
-                            class="carousel-btn prev"
-                            aria-label="Imagen anterior"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            >
-                              <polyline points="15 18 9 12 15 6" />
-                            </svg>
-                          </button>
-                          <button
-                            class="carousel-btn next"
-                            aria-label="Siguiente imagen"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            >
-                              <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                          </button>
-                          <div class="carousel-dots">
-                            {proyecto.imagenes.map((_: string, i: number) => (
-                              <button
-                                class={`carousel-dot ${i === 0 ? "active" : ""}`}
-                                aria-label={`Ir a imagen ${i + 1}`}
-                                data-target={i}
-                              />
-                            ))}
+                          <div class="ar-divider"></div>
+                          <div class="ar-marker-section">
+                            <span class="ar-step-number">2</span>
+                            <p class="ar-step-text">Apunta tu cámara a esta imagen para ver la magia</p>
+                            <div class="ar-marker-box">
+                              <img src={proyecto.marcadorAR} alt={`Marcador para ${proyecto.titulo}`} class="ar-marker-img zoomable-img" />
+                            </div>
                           </div>
                         </>
                       )}
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </dialog>
           ),
         )
       }
+      <!-- Lightbox para hacer zoom a las imágenes -->
+      <dialog id="image-lightbox" class="lightbox-modal">
+        <button class="close-lightbox-btn" aria-label="Cerrar imagen">&times;</button>
+        <img id="lightbox-img" src="" alt="Imagen ampliada" class="lightbox-img" />
+      </dialog>
     </div>
   </div>
 </section>
@@ -411,6 +475,77 @@ import { proyectos } from "../data/proyectos";
   }
 
   /* Modal Styles */
+  .modal-standard-view {
+    display: flex;
+    width: 100%;
+  }
+
+  .zoomable-img {
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+  }
+  
+  .zoomable-img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Lightbox Styles */
+  .lightbox-modal {
+    background: transparent;
+    border: none;
+    padding: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-modal:not([open]) {
+    display: none;
+  }
+
+  .lightbox-modal::backdrop {
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+  }
+
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .close-lightbox-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+  }
+
+  .close-lightbox-btn:hover {
+    background: #ff3914;
+    border-color: #ff3914;
+    transform: scale(1.1);
+  }
+
   .project-card-clickable {
     cursor: pointer;
   }
@@ -525,12 +660,121 @@ import { proyectos } from "../data/proyectos";
     flex-wrap: wrap;
     gap: 0.5rem;
     margin-bottom: 2.5rem;
+    width: 100%;
+  }
+  
+  :global(.tech-tag-modal),
+  :global(.tech-tag-card) {
+    flex-shrink: 0;
   }
 
   .modal-actions {
     display: flex;
     gap: 1rem;
     margin-top: auto;
+  }
+
+  /* AR Modal Styles */
+  .ar-container {
+    padding: 3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow-y: auto;
+  }
+
+  .ar-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: #fff;
+  }
+
+  .ar-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2.5rem;
+  }
+
+  .ar-content-wrapper {
+    display: flex;
+    gap: 3rem;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .ar-qr-section,
+  .ar-marker-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .ar-qr-section:hover,
+  .ar-marker-section:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 57, 20, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .ar-divider {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.2), transparent);
+    margin: 2rem 0;
+  }
+
+  .ar-step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ff3914;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 15px rgba(255, 57, 20, 0.5);
+  }
+
+  .ar-step-text {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    min-height: 3rem;
+  }
+
+  .ar-qr-box,
+  .ar-marker-box {
+    background: white;
+    padding: 1rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 250px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .ar-qr-img,
+  .ar-marker-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
   }
 
   .btn {
@@ -682,10 +926,26 @@ import { proyectos } from "../data/proyectos";
   }
 
   @media (max-width: 900px) {
-    .modal-glass {
+    .modal-standard-view {
       flex-direction: column-reverse;
       min-height: auto;
       overflow-y: auto;
+    }
+    .ar-content-wrapper {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .ar-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+      margin: 1rem 0;
+    }
+    .ar-container {
+      padding: 2rem 1rem;
+    }
+    .ar-title {
+      font-size: 1.8rem;
     }
     .modal-right {
       border-left: none;
@@ -734,6 +994,12 @@ import { proyectos } from "../data/proyectos";
         if (modal) {
           modal.close();
           document.body.style.overflow = "";
+          const standardView = modal.querySelector('.modal-standard-view');
+          const arView = modal.querySelector('.ar-container');
+          if (standardView && arView) {
+            (standardView as HTMLElement).style.display = 'flex';
+            (arView as HTMLElement).style.display = 'none';
+          }
         }
       });
     });
@@ -787,17 +1053,85 @@ import { proyectos } from "../data/proyectos";
       dialog.addEventListener("click", (e: Event) => {
         const mouseEvent = e as MouseEvent;
         const dialogElement = dialog as HTMLDialogElement;
+        
+        // Dont trigger close if clicking inside standard or AR views
+        const standardView = dialog.querySelector('.modal-standard-view');
+        const arView = dialog.querySelector('.ar-container');
+        
         const rect = dialogElement.getBoundingClientRect();
         const isInDialog =
           rect.top <= mouseEvent.clientY &&
           mouseEvent.clientY <= rect.top + rect.height &&
           rect.left <= mouseEvent.clientX &&
           mouseEvent.clientX <= rect.left + rect.width;
+          
         if (!isInDialog) {
           dialogElement.close();
           document.body.style.overflow = "";
+          // reset view state
+          if (standardView && arView) {
+            (standardView as HTMLElement).style.display = 'flex';
+            (arView as HTMLElement).style.display = 'none';
+          }
         }
       });
     });
+
+    // AR views toggle logic
+    const showArBtns = document.querySelectorAll(".show-ar-btn");
+    const backInfoBtns = document.querySelectorAll(".back-to-info-btn");
+
+    showArBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modal = btn.closest(".project-modal");
+        if (modal) {
+          const standardView = modal.querySelector(".modal-standard-view") as HTMLElement;
+          const arView = modal.querySelector(".ar-container") as HTMLElement;
+          if (standardView && arView) {
+            standardView.style.display = "none";
+            arView.style.display = "flex";
+          }
+        }
+      });
+    });
+
+    backInfoBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const modal = btn.closest(".project-modal");
+        if (modal) {
+          const standardView = modal.querySelector(".modal-standard-view") as HTMLElement;
+          const arView = modal.querySelector(".ar-container") as HTMLElement;
+          if (standardView && arView) {
+            arView.style.display = "none";
+            standardView.style.display = "flex";
+          }
+        }
+      });
+    });
+
+    // Image lightbox logic
+    const zoomableImgs = document.querySelectorAll(".zoomable-img");
+    const lightbox = document.getElementById("image-lightbox") as HTMLDialogElement;
+    const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+    const closeLightboxBtn = document.querySelector(".close-lightbox-btn");
+
+    if (lightbox && lightboxImg && closeLightboxBtn) {
+      zoomableImgs.forEach((img) => {
+        img.addEventListener("click", () => {
+          lightboxImg.src = (img as HTMLImageElement).src;
+          lightbox.showModal();
+        });
+      });
+
+      closeLightboxBtn.addEventListener("click", () => {
+        lightbox.close();
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.close();
+        }
+      });
+    }
   });
 </script>

@@ -6,21 +6,22 @@ export interface Props {
   items: string[];
   tagClass?: string;
   ariaLabel?: string;
+  size?: "sm" | "md" | "lg";
 }
-const { items, tagClass, ariaLabel = "Carrusel de elementos" } = Astro.props;
+const { items, tagClass, ariaLabel = "Carrusel de elementos", size = "lg" } = Astro.props;
 ---
 
 <div class="tech-carousel-wrapper" aria-label={ariaLabel}>
   <div class="tech-carousel" tabindex="0">
     <div class="carousel-track">
       {items.map(tag => (
-        <TechTag name={tag} size="lg" class={tagClass} />
+        <TechTag name={tag} size={size} class={tagClass} />
       ))}
     </div>
     <!-- Duplicamos el track para crear la ilusión de scroll infinito sin cortes -->
     <div class="carousel-track" aria-hidden="true">
       {items.map(tag => (
-        <TechTag name={tag} size="lg" class={tagClass} />
+        <TechTag name={tag} size={size} class={tagClass} />
       ))}
     </div>
   </div>
@@ -41,6 +42,7 @@ const { items, tagClass, ariaLabel = "Carrusel de elementos" } = Astro.props;
     user-select: none; 
     outline: none; 
     margin-top: .5rem;
+    margin-bottom: .5rem;
 }
 .tech-carousel:hover .carousel-track{
     animation-play-state: paused;

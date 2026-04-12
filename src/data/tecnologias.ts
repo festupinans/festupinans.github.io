@@ -10,6 +10,7 @@ export const TECNOLOGIAS = {
     NODEJS: "Node.js",
     MONGODB: "MongoDB",
     WEBGL: "WebGL",
+    WEBGPU: "WebGPU",
     REACT_NATIVE: "React Native",
     FIREBASE: "Firebase",
     REDUX: "Redux",
@@ -30,7 +31,8 @@ export const TECNOLOGIAS = {
     VR: "Realidad Virtual",
     GAMEDEV: "Desarrollo de Juegos",
     WEB: "Web",
-    BLENDER: "Blender"
+    BLENDER: "Blender",
+    VITE: "Vite",
 } as const;
 
 // Tipo extraído del objeto para usarlo en TypeScript

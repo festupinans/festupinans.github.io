@@ -1,43 +1,41 @@
 import { TECNOLOGIAS } from "./tecnologias";
-export const proyectos = [
+import { EMPRESAS, type Empresa } from "./empresas";
+
+export interface Proyecto {
+  titulo: string;
+  empresa?: Empresa;
+  descripcion: string;
+  descripcionExtensa?: string;
+  imagen: string;
+  imagenes?: string[];
+  tecnologias: (typeof TECNOLOGIAS)[keyof typeof TECNOLOGIAS][];
+  github?: string;
+  demo?: string | null;
+  esWebAR?: boolean;
+  enlaceAR?: string;
+  marcadorAR?: string;
+}
+
+export const proyectos: Proyecto[] = [
     {
-        titulo: "Proyecto Destacado 1",
-        descripcion: "Una aplicación web innovadora que resuelve un problema específico utilizando tecnologías modernas.",
-        descripcionExtensa: "Este proyecto se centra en la creación de una plataforma que permite a los usuarios interactuar de manera eficiente y efectiva. Utiliza React para el frontend, Node.js para el backend y MongoDB como base de datos, lo que garantiza una experiencia fluida y escalable.",
-        imagen: "/Img/Proyectos/1.png",
-        imagenes: ["/Img/Proyectos/1.png", "/Img/Proyectos/2.png", "/Img/Proyectos/3.png"],
-        tecnologias: [TECNOLOGIAS.REACT, TECNOLOGIAS.NODEJS, TECNOLOGIAS.MONGODB],
-        github: "https://github.com/tuusuario/proyecto1",
-        demo: "https://demo-proyecto1.com",
+        titulo: "Colsubsidio - El Origen de Experiencia de",
+        empresa: EMPRESAS.NEWRONA,
+        descripcion: "Plataforma interactiva y gamificada en WebGL para fortalecer la atencion al cliente con enfoque centrado en el usuario, DEI, manejo de crisis y medicion NPS.",
+        descripcionExtensa: "El principal reto de Colsubsidio fue optimizar una experiencia web con 5 niveles 3D para que funcionara de forma fluida en navegador, aprovechando WebGPU sin sacrificar calidad visual ni tiempos de carga. Esto exigio una estrategia cuidadosa de rendimiento, carga progresiva y control de recursos en cada escenario.\n\nTambien se trabajo en presentar gran volumen de informacion sin saturar al usuario, integrando una narrativa clara y un alto nivel de inclusion mediante narrador de textos para mejorar la accesibilidad. Ademas, se implemento el guardado seguro de datos en base de datos para trazabilidad de avance y medicion de resultados.\n\nComo cierre, se desarrollaron paneles de administracion para gestionar contenidos, consultar progreso por usuario y facilitar el seguimiento operativo del programa de formacion.",
+        imagen: "/Img/Proyectos/Colsu_1.png",
+        imagenes: ["Img/Proyectos/Colsu_1.png", "/Img/Proyectos/Colsu_2.png", "/Img/Proyectos/Colsu_3.png", "/Img/Proyectos/Colsu_4.png", "/Img/Proyectos/Colsu_5.png", "/Img/Proyectos/Colsu_6.png", "/Img/Proyectos/Colsu_7.png", "/Img/Proyectos/Colsu_8.png"],
+        tecnologias: [TECNOLOGIAS.VITE, TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.UNITY, TECNOLOGIAS.JAVASCRIPT, TECNOLOGIAS.C_SHARP, TECNOLOGIAS.FIREBASE],
     },
     {
-        titulo: "Proyecto Destacado 2",
-        descripcion: "Sistema interactivo con visualizaciones 3D y experiencias inmersivas para el usuario.",
-        descripcionExtensa: "Este proyecto se enfoca en la creación de una experiencia visual única utilizando Three.js para renderizar gráficos 3D en el navegador. La aplicación permite a los usuarios explorar entornos virtuales y experimentar con diferentes interacciones, ofreciendo una experiencia inmersiva y atractiva.",
-        imagen: "/Img/Proyectos/2.png",
-        imagenes: ["/Img/Proyectos/2.png", "/Img/Proyectos/1.png"],
-        tecnologias: [TECNOLOGIAS.THREEJS, TECNOLOGIAS.TYPESCRIPT, TECNOLOGIAS.WEBGL],
-        github: "https://github.com/tuusuario/proyecto2",
-        demo: "https://demo-proyecto2.com",
-    },
-    {
-        titulo: "Proyecto Destacado 3",
-        descripcion: "Aplicación móvil multiplataforma con funcionalidades en tiempo real y sincronización.",
-        descripcionExtensa: "Este proyecto se enfoca en la creación de una aplicación móvil que permite a los usuarios interactuar en tiempo real con otros usuarios y sincronizar datos de manera eficiente. Utiliza React Native para el desarrollo multiplataforma, Firebase para la gestión de datos en tiempo real y Redux para la administración del estado de la aplicación.",
-        imagen: "/Img/Proyectos/3.png",
-        imagenes: ["/Img/Proyectos/3.png"],
-        tecnologias: [TECNOLOGIAS.REACT_NATIVE, TECNOLOGIAS.FIREBASE, TECNOLOGIAS.REDUX],
-        github: "https://github.com/tuusuario/proyecto3",
-        demo: null,
-    },
-    {
-        titulo: "Proyecto Destacado 4",
-        descripcion: "Plataforma de e-commerce completa con pasarela de pagos y panel de administración.",
-        descripcionExtensa: "Esta plataforma de e-commerce ofrece una solución integral para la venta de productos en línea, incluyendo una pasarela de pagos segura y un panel de administración intuitivo.",
-        imagen: "/Img/Proyectos/4.png",
-        imagenes: ["/Img/Proyectos/4.png", "/Img/Proyectos/3.png", "/Img/Proyectos/2.png"],
-        tecnologias: [TECNOLOGIAS.NEXTJS, TECNOLOGIAS.STRIPE, TECNOLOGIAS.POSTGRESQL],
-        github: "https://github.com/tuusuario/proyecto4",
-        demo: "https://demo-proyecto4.com",
-    },
+        titulo: "Realidad Aumentada Web - 11 Años de Newrona",
+        empresa: EMPRESAS.NEWRONA,
+        descripcion: "Experiencia de realidad aumentada para celebrar los 11 años de Newrona, destacando hitos y logros clave a lo largo de la historia de la empresa.",
+        descripcionExtensa: "En RA Web, uno de los mayores retos fue optimizar assets de alta calidad para mantener fidelidad visual sin afectar el rendimiento en dispositivos y navegadores diversos. Se realizaron ajustes de peso, formatos y niveles de detalle para lograr tiempos de carga competitivos y una experiencia estable.\n\nOtro desafio clave fue el desarrollo y ajuste de shaders optimizados para web, buscando que el resultado final respetara el concepto visual desde la direccion creativa hasta la implementacion tecnica. El equilibrio entre estetica, compatibilidad y performance fue determinante para alcanzar el resultado esperado.",
+        imagen:"/Img/Proyectos/RA_1.PNG",
+        imagenes:["/Img/Proyectos/RA_1.PNG", "/Img/Proyectos/RA_2.PNG", "/Img/Proyectos/RA_3.PNG", "/Img/Proyectos/RA_4.PNG", "/Img/Proyectos/RA_5.PNG", "/Img/Proyectos/RA_6.PNG"],
+        tecnologias: [TECNOLOGIAS.AR, TECNOLOGIAS.WEBXR ,TECNOLOGIAS.UNITY, TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.JAVASCRIPT, TECNOLOGIAS.C_SHARP],
+        esWebAR: true,
+        enlaceAR: "https://newrona.net/tarjeta-navidad-newrona/", // Cambiar por el link real
+        marcadorAR: "/Img/Proyectos/RA_M.PNG", // Cambiar por la imagen real del marcador
+    }
 ];

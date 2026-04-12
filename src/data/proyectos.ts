@@ -2,40 +2,42 @@ import { TECNOLOGIAS } from "./tecnologias";
 export const proyectos = [
     {
         titulo: "Proyecto Destacado 1",
-        descripcion:
-            "Una aplicación web innovadora que resuelve un problema específico utilizando tecnologías modernas.",
-        imagen: "/placeholder-project.jpg",
+        descripcion: "Una aplicación web innovadora que resuelve un problema específico utilizando tecnologías modernas.",
+        descripcionExtensa: "Este proyecto se centra en la creación de una plataforma que permite a los usuarios interactuar de manera eficiente y efectiva. Utiliza React para el frontend, Node.js para el backend y MongoDB como base de datos, lo que garantiza una experiencia fluida y escalable.",
+        imagen: "/Img/Proyectos/1.png",
+        imagenes: ["/Img/Proyectos/1.png", "/Img/Proyectos/2.png", "/Img/Proyectos/3.png"],
         tecnologias: [TECNOLOGIAS.REACT, TECNOLOGIAS.NODEJS, TECNOLOGIAS.MONGODB],
         github: "https://github.com/tuusuario/proyecto1",
         demo: "https://demo-proyecto1.com",
     },
     {
         titulo: "Proyecto Destacado 2",
-        descripcion:
-            "Sistema interactivo con visualizaciones 3D y experiencias inmersivas para el usuario.",
-        imagen: "/placeholder-project.jpg",
+        descripcion: "Sistema interactivo con visualizaciones 3D y experiencias inmersivas para el usuario.",
+        descripcionExtensa: "Este proyecto se enfoca en la creación de una experiencia visual única utilizando Three.js para renderizar gráficos 3D en el navegador. La aplicación permite a los usuarios explorar entornos virtuales y experimentar con diferentes interacciones, ofreciendo una experiencia inmersiva y atractiva.",
+        imagen: "/Img/Proyectos/2.png",
+        imagenes: ["/Img/Proyectos/2.png", "/Img/Proyectos/1.png"],
         tecnologias: [TECNOLOGIAS.THREEJS, TECNOLOGIAS.TYPESCRIPT, TECNOLOGIAS.WEBGL],
         github: "https://github.com/tuusuario/proyecto2",
         demo: "https://demo-proyecto2.com",
     },
     {
         titulo: "Proyecto Destacado 3",
-        descripcion:
-            "Aplicación móvil multiplataforma con funcionalidades en tiempo real y sincronización.",
-        imagen: "/placeholder-project.jpg",
+        descripcion: "Aplicación móvil multiplataforma con funcionalidades en tiempo real y sincronización.",
+        descripcionExtensa: "Este proyecto se enfoca en la creación de una aplicación móvil que permite a los usuarios interactuar en tiempo real con otros usuarios y sincronizar datos de manera eficiente. Utiliza React Native para el desarrollo multiplataforma, Firebase para la gestión de datos en tiempo real y Redux para la administración del estado de la aplicación.",
+        imagen: "/Img/Proyectos/3.png",
+        imagenes: ["/Img/Proyectos/3.png"],
         tecnologias: [TECNOLOGIAS.REACT_NATIVE, TECNOLOGIAS.FIREBASE, TECNOLOGIAS.REDUX],
         github: "https://github.com/tuusuario/proyecto3",
         demo: null,
     },
     {
         titulo: "Proyecto Destacado 4",
-        descripcion:
-            "Plataforma de e-commerce completa con pasarela de pagos y panel de administración.",
-        imagen: "/placeholder-project.jpg",
+        descripcion: "Plataforma de e-commerce completa con pasarela de pagos y panel de administración.",
+        descripcionExtensa: "Esta plataforma de e-commerce ofrece una solución integral para la venta de productos en línea, incluyendo una pasarela de pagos segura y un panel de administración intuitivo.",
+        imagen: "/Img/Proyectos/4.png",
+        imagenes: ["/Img/Proyectos/4.png", "/Img/Proyectos/3.png", "/Img/Proyectos/2.png"],
         tecnologias: [TECNOLOGIAS.NEXTJS, TECNOLOGIAS.STRIPE, TECNOLOGIAS.POSTGRESQL],
         github: "https://github.com/tuusuario/proyecto4",
         demo: "https://demo-proyecto4.com",
     },
 ];
-
-export type Proyecto = typeof proyectos[number];

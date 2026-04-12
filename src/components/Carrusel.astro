@@ -1,0 +1,82 @@
+---
+// StackCarrusel.astro – Carrusel reutilizable, recibe elementos por prop
+export interface Props {
+  items: string[];
+  tagClass?: string;
+  ariaLabel?: string;
+}
+const { items, tagClass, ariaLabel = "Carrusel de elementos" } = Astro.props;
+---
+
+<div class="tech-carousel-wrapper" aria-label={ariaLabel}>
+  <div class="tech-carousel" tabindex="0">
+    <div class="carousel-track">
+      {items.map(tag => (
+        <span class={"tech-tag" + (tagClass ? ` ${tagClass}` : "")}>{tag}</span>
+      ))}
+    </div>
+    <!-- Duplicamos el track para crear la ilusión de scroll infinito sin cortes -->
+    <div class="carousel-track" aria-hidden="true">
+      {items.map(tag => (
+        <span class={"tech-tag" + (tagClass ? ` ${tagClass}` : "")}>{tag}</span>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+.tech-carousel-wrapper {
+    width: 100%; max-width: 650px; margin: 0 auto 2.5rem;
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+.tech-carousel { 
+    display: flex;
+    width: 100%; 
+    cursor: grab; 
+    user-select: none; 
+    outline: none; 
+    margin-top: .5rem;
+}
+.tech-carousel:hover .carousel-track{
+    animation-play-state: paused;
+}
+.carousel-track {
+    display: flex; 
+    gap: 0.75rem; 
+    padding-right: 0.75rem; /* Esencial para mantener el espacio exacto entre los dos tracks */
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 100%;
+    width: max-content;
+    will-change: transform;
+    animation: scroll-carousel 25s linear infinite; /* Controla la velocidad aquí (mayor s = más lento) */
+}
+@keyframes scroll-carousel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+.tech-tag {
+    padding: 0.6rem 1.2rem;
+    background: rgba(255, 57, 20, 0.15);
+    border: 1px solid rgba(255, 57, 20, 0.4);
+    border-radius: 25px;
+    color: #ff3914;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+.tech-tag:hover {
+    background: rgba(255, 57, 20, 0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 57, 20, 0.2);
+}
+@media (max-width: 768px) {
+    .tech-carousel-wrapper { max-width: 95vw; }
+}
+</style>

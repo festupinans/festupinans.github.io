@@ -1,5 +1,5 @@
 ---
-// SobreMi.astro - Sección de presentación personal con glassmorphism mejorado
+import Carrusel from "./Carrusel.astro";
 ---
 
 <section id="sobre-mi" class="section">
@@ -7,7 +7,7 @@
         <div class="container">
             <!-- Encabezado con nombre y título profesional -->
             <div class="hero-content">
-                <span class="greeting">Buenaass!!!, soy</span>
+                <span class="greeting">Buenaass!!!, me llamo</span>
                 <h1 class="name">Francisco Estupiñan</h1>
                 <h2 class="title">
                     Desarrollador de experiencias interactivas XR
@@ -21,19 +21,19 @@
                     visualmente impactante y funcionalmente innovador.
                 </p>
 
-                <!-- Stack tecnológico destacado -->
-                <div class="tech-stack">
-                    <span class="tech-tag">Unity</span>
-                    <span class="tech-tag">Unreal Engine</span>
-                    <span class="tech-tag">Three.js</span>
-                    <span class="tech-tag">Web</span>
-                </div>
-
+                <!-- Stack tecnológico destacado como carrusel reutilizable -->
+                <Carrusel
+                    items={[
+                        'Unity', 'Unreal Engine', 'Realidad Aumentada', 'Realidad Virtual',
+                        'Desarrollo de Juegos', 'Three.js', 'Web', 'C#', 'JavaScript',
+                        'Python', 'Blender',
+                    ]}
+                    ariaLabel="Stack tecnológico destacado"
+                />
+                
                 <!-- CTA Buttons -->
                 <div class="cta-buttons">
-                    <a href="#proyectos" class="btn btn-primary"
-                        >Ver Proyectos</a
-                    >
+                    <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
                     <a href="#contacto" class="btn btn-secondary">Contactar</a>
                 </div>
             </div>
@@ -42,156 +42,73 @@
 </section>
 
 <style>
-    .section {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 6rem 2rem 4rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    .glass-container {
-        /* background: rgba(10, 10, 20, 0.7); */
-        backdrop-filter: blur(13px);
-        -webkit-backdrop-filter: blur(13px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 24px;
-        padding: 3rem;
-        box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.4),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        max-width: 1100px;
-        width: 100%;
-    }
-
-    .container {
-        width: 100%;
-    }
-
-    .hero-content {
-        text-align: center;
-    }
-
-    .greeting {
-        display: block;
-        font-size: 1.2rem;
-        color: #ff3914;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-
-    .name {
-        font-size: clamp(2.5rem, 8vw, 4.5rem);
-        font-weight: 800;
-        color: #ffffff;
-        margin: 0;
-        line-height: 1.1;
-        text-shadow: 0 0 60px rgba(255, 57, 20, 0.4);
-    }
-
-    .title {
-        font-size: clamp(1.2rem, 3vw, 1.8rem);
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.8);
-        margin: 1rem 0 2rem;
-    }
-
-    .bio {
-        font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.7);
-        max-width: 600px;
-        margin: 0 auto 2rem;
-        line-height: 1.8;
-    }
-
-    .tech-stack {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        justify-content: center;
-        margin-bottom: 2.5rem;
-    }
-
-    .tech-tag {
-        padding: 0.6rem 1.2rem;
-        background: rgba(255, 57, 20, 0.15);
-        border: 1px solid rgba(255, 57, 20, 0.4);
-        border-radius: 25px;
-        color: #ff3914;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-    }
-
-    .tech-tag:hover {
-        background: rgba(255, 57, 20, 0.25);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(255, 57, 20, 0.2);
-    }
-
-    .cta-buttons {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .btn {
-        padding: 1rem 2rem;
-        border-radius: 12px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #ff3914, #ff6b4a);
-        color: #fff;
-        box-shadow: 0 4px 20px rgba(255, 57, 20, 0.4);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 30px rgba(255, 57, 20, 0.5);
-    }
-
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.05);
-        color: #fff;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-    }
-
-    .btn-secondary:hover {
-        border-color: #ff3914;
-        color: #ff3914;
-        background: rgba(255, 57, 20, 0.1);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .section {
-            padding: 5rem 1rem 3rem;
-        }
-
-        .glass-container {
-            padding: 2rem 1.5rem;
-            border-radius: 20px;
-        }
-
-        .bio {
-            font-size: 1rem;
-        }
-
-        .btn {
-            padding: 0.9rem 1.5rem;
-            font-size: 0.95rem;
-        }
-    }
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    z-index: 1;
+}
+.glass-container {
+    /* background: rgba(10, 10, 20, 0.7); */
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    max-width: 1100px;
+    width: 100%;
+}
+.container { width: 100%; }
+.hero-content { text-align: center; }
+.greeting {
+    display: block; font-size: 1.2rem; color: #ff3914; font-weight: 500;
+    margin-bottom: 0.5rem; letter-spacing: 2px; text-transform: uppercase;
+}
+.name {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 800; color: #ffffff; margin: 0; line-height: 1.1;
+    text-shadow: 0 0 60px rgba(255, 57, 20, 0.4);
+}
+.title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 1rem 0 2rem;
+}
+.bio {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.8;
+}
+.cta-buttons {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+}
+.btn {
+    padding: 1rem 2rem; border-radius: 12px; font-weight: 600;
+    text-decoration: none; transition: all 0.3s ease; font-size: 1rem;}
+.btn-primary {
+    background: linear-gradient(135deg, #ff3914, #ff6b4a); color: #fff;
+    box-shadow: 0 4px 20px rgba(255, 57, 20, 0.4);}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 57, 20, 0.5);}
+.btn-secondary {
+    background: rgba(255,255,255,0.05); color: #fff;
+    border: 2px solid rgba(255,255,255,0.3); backdrop-filter: blur(10px);}
+.btn-secondary:hover {
+    border-color: #ff3914; color: #ff3914; background: rgba(255,57,20,0.1);}
+@media (max-width: 768px) {
+    .section { padding: 5rem 1rem 3rem; }
+    .glass-container { padding: 2rem 1.5rem; border-radius: 20px; }
+    .bio { font-size: 1rem; }
+    .btn { padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+}
 </style>

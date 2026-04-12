@@ -1,44 +1,10 @@
 ---
 // Proyectos.astro - Grid de proyectos destacados con glassmorphism
+import TechTag from './TechTag.astro';
+import { TECNOLOGIAS } from '../data/tecnologias';
+import { proyectos } from '../data/proyectos';
 
-const proyectos = [
-    {
-        titulo: "Proyecto Destacado 1",
-        descripcion:
-            "Una aplicación web innovadora que resuelve un problema específico utilizando tecnologías modernas.",
-        imagen: "/placeholder-project.jpg",
-        tecnologias: ["React", "Node.js", "MongoDB"],
-        github: "https://github.com/tuusuario/proyecto1",
-        demo: "https://demo-proyecto1.com",
-    },
-    {
-        titulo: "Proyecto Destacado 2",
-        descripcion:
-            "Sistema interactivo con visualizaciones 3D y experiencias inmersivas para el usuario.",
-        imagen: "/placeholder-project.jpg",
-        tecnologias: ["Three.js", "TypeScript", "WebGL"],
-        github: "https://github.com/tuusuario/proyecto2",
-        demo: "https://demo-proyecto2.com",
-    },
-    {
-        titulo: "Proyecto Destacado 3",
-        descripcion:
-            "Aplicación móvil multiplataforma con funcionalidades en tiempo real y sincronización.",
-        imagen: "/placeholder-project.jpg",
-        tecnologias: ["React Native", "Firebase", "Redux"],
-        github: "https://github.com/tuusuario/proyecto3",
-        demo: null,
-    },
-    {
-        titulo: "Proyecto Destacado 4",
-        descripcion:
-            "Plataforma de e-commerce completa con pasarela de pagos y panel de administración.",
-        imagen: "/placeholder-project.jpg",
-        tecnologias: ["Next.js", "Stripe", "PostgreSQL"],
-        github: "https://github.com/tuusuario/proyecto4",
-        demo: "https://demo-proyecto4.com",
-    },
-];
+
 ---
 
 <section id="proyectos" class="section">
@@ -50,8 +16,15 @@ const proyectos = [
 
             <div class="projects-grid">
                 {
-                    proyectos.map((proyecto) => (
-                        <article class="project-card">
+                    proyectos.map((proyecto: {
+    titulo: string;
+    descripcion: string;
+    imagen: string;
+    tecnologias: (typeof TECNOLOGIAS[keyof typeof TECNOLOGIAS])[];
+    github?: string;
+    demo?: string | null;
+}, index: number) => (
+                        <article class="project-card project-card-clickable" data-target={`project-modal-${index}`}>
                             <div class="project-image">
                                 <div class="image-placeholder">
                                     <svg
@@ -65,66 +38,27 @@ const proyectos = [
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                     >
-                                        <rect
-                                            x="3"
-                                            y="3"
-                                            width="18"
-                                            height="18"
-                                            rx="2"
-                                            ry="2"
-                                        />
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                                         <circle cx="8.5" cy="8.5" r="1.5" />
                                         <polyline points="21 15 16 10 5 21" />
                                     </svg>
                                 </div>
                                 <div class="project-overlay">
+                                    <span class="view-more-text">Ver más</span>
                                     <div class="project-links">
                                         {proyecto.github && (
-                                            <a
-                                                href={proyecto.github}
-                                                class="project-link"
-                                                target="_blank"
-                                                rel="noopener"
-                                                title="Ver código"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="20"
-                                                    height="20"
-                                                    viewBox="0 0 24 24"
-                                                    fill="currentColor"
-                                                >
+                                            <a href={proyecto.github} class="project-link" target="_blank" rel="noopener" title="Ver código" onclick="event.stopPropagation()">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                                 </svg>
                                             </a>
                                         )}
                                         {proyecto.demo && (
-                                            <a
-                                                href={proyecto.demo}
-                                                class="project-link"
-                                                target="_blank"
-                                                rel="noopener"
-                                                title="Ver demo"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="20"
-                                                    height="20"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                >
+                                            <a href={proyecto.demo} class="project-link" target="_blank" rel="noopener" title="Ver demo" onclick="event.stopPropagation()">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                                                     <polyline points="15 3 21 3 21 9" />
-                                                    <line
-                                                        x1="10"
-                                                        y1="14"
-                                                        x2="21"
-                                                        y2="3"
-                                                    />
+                                                    <line x1="10" y1="14" x2="21" y2="3" />
                                                 </svg>
                                             </a>
                                         )}
@@ -137,8 +71,8 @@ const proyectos = [
                                     {proyecto.descripcion}
                                 </p>
                                 <div class="project-techs">
-                                    {proyecto.tecnologias.map((tech) => (
-                                        <span class="tech-tag">{tech}</span>
+                                    {proyecto.tecnologias.map((tech: typeof TECNOLOGIAS[keyof typeof TECNOLOGIAS]) => (
+                                        <TechTag name={tech} size="sm" />
                                     ))}
                                 </div>
                             </div>
@@ -146,6 +80,59 @@ const proyectos = [
                     ))
                 }
             </div>
+
+            <!-- Modales (renderizados fuera del grid para no romper layout y scopes) -->
+            {
+                proyectos.map((proyecto: {
+    titulo: string;
+    descripcion: string;
+    imagen: string;
+    tecnologias: (typeof TECNOLOGIAS[keyof typeof TECNOLOGIAS])[];
+    github?: string;
+    demo?: string | null;
+}, index: number) => (
+                    <dialog id={`project-modal-${index}`} class="project-modal">
+                        <div class="modal-glass">
+                            <button class="close-modal-btn" aria-label="Cerrar modal">&times;</button>
+                            <div class="modal-left">
+                                <h3 class="modal-title">{proyecto.titulo}</h3>
+                                <p class="modal-description">{proyecto.descripcion}</p>
+                                <p class="modal-extended-description">
+                                    Aquí puedes añadir más información extensa sobre el proyecto, detalles de tu participación, desafíos enfrentados y cómo se resolvieron.
+                                </p>
+                                <div class="modal-techs">
+                                    {proyecto.tecnologias.map((tech: typeof TECNOLOGIAS[keyof typeof TECNOLOGIAS]) => (
+                                        <TechTag name={tech} size="md" />
+                                    ))}
+                                </div>
+                                <div class="modal-actions">
+                                    {proyecto.github && (
+                                        <a href={proyecto.github} class="btn btn-outline" target="_blank" rel="noopener">
+                                            Ver Repositorio
+                                        </a>
+                                    )}
+                                    {proyecto.demo && (
+                                        <a href={proyecto.demo} class="btn btn-primary" target="_blank" rel="noopener">
+                                            Ver Demo
+                                        </a>
+                                    )}
+                                </div>
+                            </div>
+                            <div class="modal-right">
+                                <div class="modal-image-wrapper">
+                                    <div class="modal-image-placeholder">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                            <circle cx="8.5" cy="8.5" r="1.5" />
+                                            <polyline points="21 15 16 10 5 21" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+                ))
+            }
         </div>
     </div>
 </section>
@@ -293,15 +280,6 @@ const proyectos = [
         gap: 0.5rem;
     }
 
-    .tech-tag {
-        font-size: 0.75rem;
-        padding: 0.3rem 0.7rem;
-        background: rgba(255, 57, 20, 0.15);
-        border: 1px solid rgba(255, 57, 20, 0.3);
-        border-radius: 12px;
-        color: #ff3914;
-    }
-
     /* Responsive */
     @media (max-width: 900px) {
         .projects-grid {
@@ -322,4 +300,248 @@ const proyectos = [
             padding: 1.25rem;
         }
     }
+
+    /* Modal Styles */
+    .project-card-clickable {
+        cursor: pointer;
+    }
+
+    .project-overlay {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .view-more-text {
+        color: #fff;
+        font-weight: 600;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .project-card:hover .view-more-text {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .project-modal {
+        background: transparent;
+        border: none;
+        padding: 0;
+        max-width: 900px;
+        width: 95%;
+        margin: auto;
+    }
+
+    .project-modal::backdrop {
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .modal-glass {
+        background: rgba(15, 15, 25, 0.9);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        color: white;
+        min-height: 500px;
+    }
+
+    .close-modal-btn {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.3s ease;
+    }
+
+    .close-modal-btn:hover {
+        background: #ff3914;
+        border-color: #ff3914;
+        transform: scale(1.1);
+    }
+
+    .modal-left {
+        flex: 1;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .modal-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin: 0 0 1rem;
+        color: #fff;
+    }
+
+    .modal-description {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin: 0 0 1rem;
+    }
+
+    .modal-extended-description {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.6;
+        margin: 0 0 2rem;
+    }
+
+    .modal-techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: auto;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background: #ff3914;
+        color: white;
+        border: 1px solid #ff3914;
+    }
+
+    .btn-primary:hover {
+        background: #ff5733;
+        box-shadow: 0 4px 15px rgba(255, 57, 20, 0.4);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-outline:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: white;
+    }
+
+    .modal-right {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.03);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .modal-image-wrapper {
+        width: 100%;
+        height: 100%;
+        padding: 2rem;
+    }
+
+    .modal-image-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(255, 57, 20, 0.1), rgba(255, 255, 255, 0.02));
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 900px) {
+        .modal-glass {
+            flex-direction: column-reverse;
+        }
+        .modal-right {
+            border-left: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            min-height: 250px;
+        }
+        .modal-left {
+            padding: 2rem;
+        }
+        .modal-title {
+            font-size: 1.8rem;
+        }
+        .modal-image-wrapper {
+            padding: 1rem;
+        }
+    }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const projectCards = document.querySelectorAll('.project-card-clickable');
+        const closeBtns = document.querySelectorAll('.close-modal-btn');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const targetId = card.getAttribute('data-target');
+                if (targetId) {
+                    const modal = document.getElementById(targetId) as HTMLDialogElement;
+                    if (modal) {
+                        modal.showModal();
+                        document.body.style.overflow = 'hidden'; // Prevent scrolling
+                    }
+                }
+            });
+        });
+
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modal = btn.closest('dialog');
+                if (modal) {
+                    modal.close();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Close on backdrop click
+        const dialogs = document.querySelectorAll('.project-modal');
+        dialogs.forEach(dialog => {
+            dialog.addEventListener('click', (e: Event) => {
+                const mouseEvent = e as MouseEvent;
+                const dialogElement = dialog as HTMLDialogElement;
+                const rect = dialogElement.getBoundingClientRect();
+                const isInDialog = (rect.top <= mouseEvent.clientY && mouseEvent.clientY <= rect.top + rect.height &&
+                                  rect.left <= mouseEvent.clientX && mouseEvent.clientX <= rect.left + rect.width);
+                if (!isInDialog) {
+                    dialogElement.close();
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    });
+</script>

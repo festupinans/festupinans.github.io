@@ -9,9 +9,11 @@ export interface Props {
   size?: "sm" | "md" | "lg";
 }
 const { items, tagClass, ariaLabel = "Carrusel de elementos", size = "lg" } = Astro.props;
+let isAnimating = items.length > 4; // Solo animar si hay mas de 4 elementos
 ---
-
-<div class="tech-carousel-wrapper" aria-label={ariaLabel}>
+{/* Carrusel de tecnologías, con scroll infinito y pausa al hover */
+isAnimating && (
+<div class={'tech-carousel-wrapper' + size} aria-label={ariaLabel}>
   <div class="tech-carousel" tabindex="0">
     <div class="carousel-track">
       {items.map(tag => (
@@ -27,9 +29,39 @@ const { items, tagClass, ariaLabel = "Carrusel de elementos", size = "lg" } = As
   </div>
 </div>
 
+) || (
+  <div class="static-tech-list" aria-label={ariaLabel}>
+    {items.map(tag => (
+      <TechTag name={tag} size={size} class={tagClass} />
+    ))}
+  </div>
+)
+}
+
 <style>
-.tech-carousel-wrapper {
+  /* Estilos para cuando hay 4 o menos elementos (ESTÁTICO) */
+.static-tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+}
+.tech-carousel-wrapperlg {
     width: 100%; max-width: 650px; margin: 0 auto 2.5rem;
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+.tech-carousel-wrappersm {
+    width: 100%; max-width: 650px; margin: 0 auto 2.5rem;
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+}
+.tech-carousel-wrappermd{
+ width: 100%; max-width: 650px; margin: 0;
     position: relative;
     overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);

@@ -1,0 +1,184 @@
+---
+---
+<div id="ai-core-webgl"></div>
+
+<script>
+  import * as THREE from "three";
+
+  const container = document.getElementById("ai-core-webgl");
+  
+  if (container) {
+    const getContainerSize = () => {
+      const rect = container.getBoundingClientRect();
+      const width = rect.width || window.innerWidth;
+      const height = rect.height || window.innerHeight;
+      return { width, height };
+    };
+
+    const { width: initialWidth, height: initialHeight } = getContainerSize();
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, initialWidth / initialHeight, 0.1, 1000);
+    camera.position.z = 4;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+
+    const resizeRenderer = () => {
+      const { width, height } = getContainerSize();
+      if (!width || !height) return;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    };
+
+    resizeRenderer();
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let motionScale = prefersReducedMotion.matches ? 0.35 : 1;
+
+    const updateMotionScale = () => {
+      motionScale = prefersReducedMotion.matches ? 0.35 : 1;
+    };
+
+    if (prefersReducedMotion.addEventListener) {
+      prefersReducedMotion.addEventListener("change", updateMotionScale);
+    } else if ((prefersReducedMotion as any).addListener) {
+      (prefersReducedMotion as any).addListener(updateMotionScale);
+    }
+
+    // Geometría del núcleo (esfera)
+    const baseParticleCount = getContainerSize().width < 720 ? 1200 : 2000;
+    const particleCount = Math.floor(baseParticleCount * (prefersReducedMotion.matches ? 0.7 : 1));
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const colorInside = new THREE.Color(0xffffff); 
+    const colorOutside = new THREE.Color(0xff3914); 
+
+    for (let i = 0; i < particleCount; i++) {
+      // Distribución esférica aleatoria
+      const theta = Math.random() * Math.PI * 2;
+      const phi = Math.acos((Math.random() * 2) - 1);
+      const radius = 1.5 + (Math.random() * 0.2); // Radio base + algo de ruido
+
+      const x = radius * Math.sin(phi) * Math.cos(theta);
+      const y = radius * Math.sin(phi) * Math.sin(theta);
+      const z = radius * Math.cos(phi);
+
+      positions[i * 3] = x;
+      positions[i * 3 + 1] = y;
+      positions[i * 3 + 2] = z;
+
+      // Color basado en la posición para darle un gradiente
+      const mixedColor = colorInside.clone().lerp(colorOutside, Math.random());
+      colors[i * 3] = mixedColor.r;
+      colors[i * 3 + 1] = mixedColor.g;
+      colors[i * 3 + 2] = mixedColor.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    // Material de las partículas
+    const baseParticleSize = 0.03;
+    const material = new THREE.PointsMaterial({
+      size: baseParticleSize,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Sistema secundario: anillos o ruido externo (opcional para hacerlo más "núcleo")
+    const coreGeometry = new THREE.IcosahedronGeometry(1.2, 2);
+    const coreMaterial = new THREE.MeshBasicMaterial({
+      color: 0x1e3a8a,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15
+    });
+    const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+    scene.add(coreMesh);
+
+    const baseCoreColor = new THREE.Color(0x1e3a8a);
+    const speakCoreColor = new THREE.Color(0xff5c2b);
+    let targetSpeaking = 0;
+    let speakingLevel = 0;
+    let isPaused = false;
+
+    window.addEventListener("ai-core:speaking", (event) => {
+      const detail = (event as CustomEvent)?.detail as { active?: boolean } | undefined;
+      targetSpeaking = detail?.active ? 1 : 0;
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      isPaused = document.hidden;
+    });
+
+    // Animación
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      if (isPaused) return;
+      const elapsedTime = clock.getElapsedTime();
+
+      speakingLevel = THREE.MathUtils.lerp(speakingLevel, targetSpeaking, 0.08);
+
+      // Rotación suave del núcleo
+      const rotationSpeed = (0.1 + speakingLevel * 0.6) * motionScale;
+      particles.rotation.y = elapsedTime * rotationSpeed;
+      particles.rotation.z = elapsedTime * (rotationSpeed * 0.5);
+      
+      coreMesh.rotation.x = elapsedTime * (-0.1 - speakingLevel * 0.3) * motionScale;
+      coreMesh.rotation.y = elapsedTime * (-0.15 - speakingLevel * 0.4) * motionScale;
+
+      // Efecto de "respiración" o pulsación modificando la escala
+      const pulseSpeed = (2 + speakingLevel * 4) * motionScale;
+      const pulseAmount = 0.05 + speakingLevel * 0.06;
+      const scale = 1 + Math.sin(elapsedTime * pulseSpeed) * pulseAmount;
+      const coreScale = scale * (1 + speakingLevel * 0.08);
+      particles.scale.set(scale, scale, scale);
+      coreMesh.scale.set(coreScale, coreScale, coreScale);
+
+      material.opacity = 0.7 + speakingLevel * 0.25;
+      material.size = baseParticleSize + speakingLevel * 0.012;
+      coreMaterial.opacity = 0.12 + speakingLevel * 0.25;
+      coreMaterial.color.copy(baseCoreColor).lerp(speakCoreColor, speakingLevel * 0.8);
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // Responsive
+    const hostWindow = window as Window;
+
+    if ("ResizeObserver" in hostWindow) {
+      const resizeObserver = new ResizeObserver(() => resizeRenderer());
+      resizeObserver.observe(container);
+    } else {
+      hostWindow.addEventListener('resize', resizeRenderer);
+    }
+  }
+</script>
+
+<style>
+  #ai-core-webgl {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+</style>

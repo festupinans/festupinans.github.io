@@ -1,0 +1,75 @@
+---
+import AiCore3D from "./AiCore3D.astro";
+import AiChat from "./AiChat.astro";
+---
+
+<section class="ai-agent-section" id="ai-agent">
+  <div class="ai-agent-grid">
+    <div class="ai-core-pane" aria-hidden="true">
+      <AiCore3D />
+    </div>
+    <div class="ai-chat-pane">
+      <AiChat />
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai-agent-section {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    min-height: 100vh;
+    background-color: #050508f2; /* Fondo sólido oscuro para tapar la escena de atrás */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 6vw;
+    z-index: 20; /* Asegurar que esté por encima de la escena principal que es fija */
+    overflow: hidden;
+  }
+
+  .ai-agent-grid {
+    width: min(1200px, 100%);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 520px);
+    align-items: center;
+    gap: clamp(24px, 5vw, 64px);
+  }
+
+  .ai-core-pane {
+    position: relative;
+    width: 100%;
+    height: min(70vh, 520px);
+    min-height: 320px;
+  }
+
+  .ai-chat-pane {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 900px) {
+    .ai-agent-section {
+      padding: 32px 16px;
+    }
+
+    .ai-agent-grid {
+      display: block;
+    }
+
+    .ai-core-pane {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .ai-chat-pane {
+      position: relative;
+      z-index: 2;
+      justify-content: center;
+    }
+  }
+</style>

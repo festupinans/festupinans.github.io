@@ -1,0 +1,242 @@
+---
+// Servicios.astro - Sección de servicios ofrecidos con glassmorphism
+import TechTag from "./TechTag.astro";
+import { TECNOLOGIAS } from "../data/tecnologias";
+
+const servicios = [
+    {
+        titulo: "Realidad Aumentada",
+        descripcion: "Creación de experiencias de RA para web y móvil. Integración con marcadores o sin marcadores (markerless), optimizadas para rendimiento y calidad visual.",
+        icono: "RA",
+        tecnologias: [TECNOLOGIAS.AR, TECNOLOGIAS.WEBXR, TECNOLOGIAS.UNITY, TECNOLOGIAS.WEBGL],
+        plataformas: ["Web", "Android", "iOS"],
+    },
+    {
+        titulo: "Realidad Virtual",
+        descripcion: "Experiencias inmersivas de RV desarrolladas en Unity y Unreal Engine. Desde aplicaciones interactivas hasta experiencias 360°, optimizadas para distintos niveles de hardware.",
+        icono: "RV",
+        tecnologias: [TECNOLOGIAS.VR, TECNOLOGIAS.UNITY, TECNOLOGIAS.UNREAL_ENGINE, TECNOLOGIAS.C_SHARP],
+        plataformas: ["Quest", "Windows", "Web"],
+    },
+    {
+        titulo: "Realidad Mixta",
+        descripcion: "Proyectos que combinan elementos de RA y RV para crear experiencias híbridas únicas, adaptadas a las necesidades específicas de cada proyecto.",
+        icono: "RM",
+        tecnologias: [TECNOLOGIAS.AR, TECNOLOGIAS.VR, TECNOLOGIAS.UNITY, TECNOLOGIAS.WEBXR],
+        plataformas: ["Quest", "Windows", "Android", "iOS"],
+    },
+    {
+        titulo: "Web 3D e Interactiva",
+        descripcion: "Gráficos 3D en navegador usando WebGL y WebGPU. Experiencias 3D de alto rendimiento sin necesidad de plugins, sitios web inmersivos y experiencias gamificadas accesibles desde cualquier dispositivo.",
+        icono: "3D",
+        tecnologias: [TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.THREEJS, TECNOLOGIAS.JAVASCRIPT, TECNOLOGIAS.REACT, TECNOLOGIAS.ASTRO],
+        plataformas: ["Web"],
+    },
+    {
+        titulo: "Desarrollo Unity",
+        descripcion: "Desarrollo completo de experiencias interactivas en Unity. Juegos, aplicaciones de formación, simulaciones y experiencias para diversas plataformas.",
+        icono: "U3D",
+        tecnologias: [TECNOLOGIAS.UNITY, TECNOLOGIAS.C_SHARP, TECNOLOGIAS.GAMEDEV],
+        plataformas: ["Windows", "Android", "iOS", "Web", "Quest"],
+    },
+    {
+        titulo: "Desarrollo Unreal",
+        descripcion: "Desarrollo de experiencias y videojuegos con Unreal Engine. Gráficos de alta fidelidad, cinematicas interactivas y experiencias inmersivas para PC y Realidad Virtual.",
+        icono: "UE",
+        tecnologias: [TECNOLOGIAS.UNREAL_ENGINE, TECNOLOGIAS.GAMEDEV, TECNOLOGIAS.BLENDER],
+        plataformas: ["Windows", "Quest"],
+    },
+];
+---
+
+<section id="servicios" class="section">
+    <div class="glass-wrapper">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-accent">//</span> Servicios
+            </h2>
+
+            <div class="servicios-grid">
+                {
+                    servicios.map((servicio) => (
+                        <article class="servicio-card">
+                            <div class="servicio-header">
+                                <div class="servicio-icono">
+                                    <span class="icono-texto">{servicio.icono}</span>
+                                </div>
+                                <h3 class="servicio-titulo">{servicio.titulo}</h3>
+                            </div>
+                            <p class="servicio-descripcion">{servicio.descripcion}</p>
+                            <div class="servicio-techs">
+                                {
+                                    servicio.tecnologias.map((tech) => (
+                                        <TechTag name={tech} size="sm" />
+                                    ))
+                                }
+                            </div>
+                            <div class="servicio-plataformas">
+                                {servicio.plataformas.map((plataforma) => (
+                                    <span class="plataforma-tag">{plataforma}</span>
+                                ))}
+                            </div>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .glass-wrapper {
+        backdrop-filter: blur(13px);
+        -webkit-backdrop-filter: blur(13px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 3rem;
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        max-width: 1100px;
+        width: 100%;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: #ffffff;
+        margin-bottom: 3rem;
+        font-weight: 700;
+    }
+
+    .title-accent {
+        color: #ff3914;
+    }
+
+    .servicios-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+    .servicio-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 1.75rem;
+        transition: all 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .servicio-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(255, 57, 20, 0.5);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .servicio-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .servicio-icono {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, rgba(255, 57, 20, 0.2), rgba(255, 107, 74, 0.1));
+        border: 1px solid rgba(255, 57, 20, 0.3);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .icono-texto {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #ff3914;
+        letter-spacing: 1px;
+    }
+
+    .servicio-titulo {
+        font-size: 1.15rem;
+        color: #ffffff;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .servicio-descripcion {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.6;
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    .servicio-techs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .servicio-plataformas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: auto;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .plataforma-tag {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 0.25rem 0.6rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 1024px) {
+        .servicios-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 700px) {
+        .section {
+            padding: 5rem 1rem;
+        }
+
+        .glass-wrapper {
+            padding: 2rem 1.5rem;
+        }
+
+        .servicios-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .servicio-card {
+            padding: 1.5rem;
+        }
+    }
+</style>

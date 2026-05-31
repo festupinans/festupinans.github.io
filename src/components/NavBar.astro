@@ -18,19 +18,18 @@
 
         <!-- Links de navegación -->
         <ul class="nav-menu" id="nav-menu">
-            <li>
+            <!-- <li>
                 <a
                     href="#ai-agent"
                     class="nav-link active"
                     data-section="ai-agent">AI Agent</a
                 >
+            </li> -->
+            <li>
+                <a href="#sobre-mi" class="nav-link" data-section="sobre-mi">Sobre mí</a>
             </li>
             <li>
-                <a
-                    href="#sobre-mi"
-                    class="nav-link active"
-                    data-section="sobre-mi">Sobre mí</a
-                >
+                <a href="#servicios" class="nav-link" data-section="servicios">Servicios</a>
             </li>
             <li>
                 <a
@@ -321,7 +320,7 @@
             e.preventDefault();
             closeMenu();
 
-            const targetId = link.getAttribute("href");
+            const targetId = link.getAttribute("href") ?? "#";
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {

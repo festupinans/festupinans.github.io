@@ -18,10 +18,10 @@ export interface Proyecto {
 
 export const proyectos: Proyecto[] = [
     {
-        titulo: "Colsubsidio - El Origen de Experiencia de",
+        titulo: "Video juego WebGL",
         empresa: EMPRESAS.NEWRONA,
         descripcion: "Plataforma interactiva y gamificada en WebGL para fortalecer la atencion al cliente con enfoque centrado en el usuario, DEI, manejo de crisis y medicion NPS.",
-        descripcionExtensa: "El principal reto de Colsubsidio fue optimizar una experiencia web con 5 niveles 3D para que funcionara de forma fluida en navegador, aprovechando WebGPU sin sacrificar calidad visual ni tiempos de carga. Esto exigio una estrategia cuidadosa de rendimiento, carga progresiva y control de recursos en cada escenario.\n\nTambien se trabajo en presentar gran volumen de informacion sin saturar al usuario, integrando una narrativa clara y un alto nivel de inclusion mediante narrador de textos para mejorar la accesibilidad. Ademas, se implemento el guardado seguro de datos en base de datos para trazabilidad de avance y medicion de resultados.\n\nComo cierre, se desarrollaron paneles de administracion para gestionar contenidos, consultar progreso por usuario y facilitar el seguimiento operativo del programa de formacion.",
+        descripcionExtensa: "El principal reto fue optimizar una experiencia web con 5 niveles 3D para que funcionara de forma fluida en navegador, aprovechando WebGPU sin sacrificar calidad visual ni tiempos de carga. Esto exigio una estrategia cuidadosa de rendimiento, carga progresiva y control de recursos en cada escenario.\n\nTambien se trabajo en presentar gran volumen de informacion sin saturar al usuario, integrando una narrativa clara y un alto nivel de inclusion mediante narrador de textos para mejorar la accesibilidad. Ademas, se implemento el guardado seguro de datos en base de datos para trazabilidad de avance y medicion de resultados.\n\nComo cierre, se desarrollaron paneles de administracion para gestionar contenidos, consultar progreso por usuario y facilitar el seguimiento operativo del programa de formacion.",
         imagen: "/Img/Proyectos/Colsu_1.webp",
         imagenes: ["Img/Proyectos/Colsu_1.webp", "/Img/Proyectos/Colsu_2.webp", "/Img/Proyectos/Colsu_3.webp", "/Img/Proyectos/Colsu_4.webp", "/Img/Proyectos/Colsu_5.webp", "/Img/Proyectos/Colsu_6.webp", "/Img/Proyectos/Colsu_7.webp", "/Img/Proyectos/Colsu_8.webp"],
         tecnologias: [TECNOLOGIAS.VITE, TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.UNITY, TECNOLOGIAS.JAVASCRIPT, TECNOLOGIAS.C_SHARP, TECNOLOGIAS.FIREBASE],

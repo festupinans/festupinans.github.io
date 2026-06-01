@@ -1,50 +1,147 @@
 ---
 // Servicios.astro - Sección de servicios ofrecidos con glassmorphism
 import TechTag from "./TechTag.astro";
+import ServicioModal from "./ServicioModal.astro";
 import { TECNOLOGIAS } from "../data/tecnologias";
 
 const servicios = [
     {
+        id: "realidad-aumentada",
         titulo: "Realidad Aumentada",
-        descripcion: "Creación de experiencias de RA para web y móvil. Integración con marcadores o sin marcadores (markerless), optimizadas para rendimiento y calidad visual.",
+        descripcionCorta: "Creación de experiencias de RA para web y móvil. Integración con marcadores o sin marcadores (markerless), optimizadas para rendimiento y calidad visual.",
         icono: "RA",
         tecnologias: [TECNOLOGIAS.AR, TECNOLOGIAS.WEBXR, TECNOLOGIAS.UNITY, TECNOLOGIAS.WEBGL],
         plataformas: ["Web", "Android", "iOS"],
+        descripcionExtensa: "Desarrollo experiencias de Realidad Aumentada que van desde catálogos interactivos y packaging inteligente hasta experiencias publicitarias memorables. Cada proyecto se diseña pensando en el objetivo de negocio y la mejor forma de conectar al usuario con el producto.",
+        proceso: [
+            "Briefing y definición de objetivos",
+            "Diseño de experiencia y wireframes",
+            "Desarrollo de assets 3D optimizados",
+            "Implementación de RA (markerless o con marcador)",
+            "Pruebas en dispositivos y plataformas objetivo",
+            "Despliegue y seguimiento de métricas",
+        ],
+        queNecesito: [
+            "Descripción del proyecto o producto a mostrar",
+            "Referencias visuales o guías de estilo",
+            "Assets 2D/3D existentes (si los hay)",
+            "Acceso a la plataforma de distribución (si aplica)",
+        ],
     },
     {
+        id: "realidad-virtual",
         titulo: "Realidad Virtual",
-        descripcion: "Experiencias inmersivas de RV desarrolladas en Unity y Unreal Engine. Desde aplicaciones interactivas hasta experiencias 360°, optimizadas para distintos niveles de hardware.",
+        descripcionCorta: "Experiencias inmersivas de RV desarrolladas en Unity y Unreal Engine. Desde aplicaciones interactivas hasta experiencias 360°, optimizadas para distintos niveles de hardware.",
         icono: "RV",
         tecnologias: [TECNOLOGIAS.VR, TECNOLOGIAS.UNITY, TECNOLOGIAS.UNREAL_ENGINE, TECNOLOGIAS.C_SHARP],
         plataformas: ["Quest", "Windows", "Web"],
+        descripcionExtensa: "Creación de mundos virtuales inmersivos para entrenamiento corporativo, visualización de productos, simulaciones educativas y experiencias de marca. Desde prototipos rápidos hasta productos finales optimizados para hardware específico.",
+        proceso: [
+            "Entendimiento del entorno VR y sus limitaciones",
+            "Diseño de locomotion y interacción VR-safe",
+            "Desarrollo en Unity o Unreal según el caso",
+            "Optimización para target hardware (Quest, PC VR)",
+            "User testing con usuarios reales",
+            "Polishing y despliegue en la plataforma elegida",
+        ],
+        queNecesito: [
+            "Objetivo de la experiencia y público objetivo",
+            "Storyboard o descripción de escenas",
+            "Hardware destino (Quest 2/3/Pro, PC VR, etc.)",
+            "Presupuesto de poly count y assets si ya existen",
+        ],
     },
     {
+        id: "realidad-mixta",
         titulo: "Realidad Mixta",
-        descripcion: "Proyectos que combinan elementos de RA y RV para crear experiencias híbridas únicas, adaptadas a las necesidades específicas de cada proyecto.",
+        descripcionCorta: "Proyectos que combinan elementos de RA y RV para crear experiencias híbridas únicas, adaptadas a las necesidades específicas de cada proyecto.",
         icono: "RM",
         tecnologias: [TECNOLOGIAS.AR, TECNOLOGIAS.VR, TECNOLOGIAS.UNITY, TECNOLOGIAS.WEBXR],
         plataformas: ["Quest", "Windows", "Android", "iOS"],
+        descripcionExtensa: "Proyectos que aprovechan lo mejor de ambos mundos. Puede ser una experiencia RV que comienza con una presentación AR desde el teléfono, o una app de RA que escala a una experiencia completa en headset. Cada proyecto híbrido se diseña desde cero según la necesidad.",
+        proceso: [
+            "Exploración de la mejor combinación RA/RV",
+            "Diseño de la narrativa y transición entre medios",
+            "Desarrollo integrado de ambos componentes",
+            "Sincronización y pruebas de la experiencia completa",
+            "Optimización multi-plataforma",
+            "Lanzamiento y soporte técnico",
+        ],
+        queNecesito: [
+            "Descripción del problema a resolver",
+            "Dispositivos disponibles del usuario final",
+            "Flujo esperado de la experiencia",
+            "Presupuesto y deadline",
+        ],
     },
     {
+        id: "web-3d",
         titulo: "Web 3D e Interactiva",
-        descripcion: "Gráficos 3D en navegador usando WebGL y WebGPU. Experiencias 3D de alto rendimiento sin necesidad de plugins, sitios web inmersivos y experiencias gamificadas accesibles desde cualquier dispositivo.",
+        descripcionCorta: "Gráficos 3D en navegador usando WebGL y WebGPU. Experiencias 3D de alto rendimiento sin necesidad de plugins, sitios web inmersivos y experiencias gamificadas accesibles desde cualquier dispositivo.",
         icono: "3D",
         tecnologias: [TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.THREEJS, TECNOLOGIAS.JAVASCRIPT, TECNOLOGIAS.REACT, TECNOLOGIAS.ASTRO],
         plataformas: ["Web"],
+        descripcionExtensa: "Transforma tu sitio web en una experiencia memorable. Visualizadores de productos 360°, configuradores 3D, juegos web, experiencias de marca inmersivas y portales interactivos. Todo corriendo en el navegador, accesible desde cualquier lugar, sin instalaciones.",
+        proceso: [
+            "Arquitectura técnica y diseño de la experiencia 3D",
+            "Modelado y texturizado de assets",
+            "Desarrollo del render 3D (Three.js / WebGPU)",
+            "Integración con el sitio web existente",
+            "Optimización de rendimiento y tiempos de carga",
+            "QA en navegadores y dispositivos reales",
+        ],
+        queNecesito: [
+            "Briefing del sitio web o plataforma",
+            "Assets de marca (logos, colores, tipografías)",
+            "Modelo 3D del producto (si existe) o referencias",
+            "Requerimientos de rendimiento y compatibilidad",
+        ],
     },
     {
+        id: "desarrollo-unity",
         titulo: "Desarrollo Unity",
-        descripcion: "Desarrollo completo de experiencias interactivas en Unity. Juegos, aplicaciones de formación, simulaciones y experiencias para diversas plataformas.",
+        descripcionCorta: "Desarrollo completo de experiencias interactivas en Unity. Juegos, aplicaciones de formación, simulaciones y experiencias para diversas plataformas.",
         icono: "U3D",
         tecnologias: [TECNOLOGIAS.UNITY, TECNOLOGIAS.C_SHARP, TECNOLOGIAS.GAMEDEV],
         plataformas: ["Windows", "Android", "iOS", "Web", "Quest"],
+        descripcionExtensa: "Desde juegos móviles hasta simuladores de formación empresarial, pasando por aplicaciones interactivas para museos y experiencias publicitarias. Unity es mi motor principal para proyectos que requieren flexibilidad multi-plataforma sin sacrificar calidad.",
+        proceso: [
+            "Game design document o documento de requerimientos",
+            "Prototipo jugable para validar la mecánica core",
+            "Desarrollo iterativo con feedback continuo",
+            "Integración de assets 3D/2D y audio",
+            "Testing en plataformas objetivo",
+            "Publicación y soporte post-lanzamiento",
+        ],
+        queNecesito: [
+            "Descripción del proyecto y género/mecánica de juego",
+            "Assets iniciales (o presupuesto para crearlos)",
+            "Target platforms y factores de forma",
+            "Modelo de monetización (si aplica)",
+        ],
     },
     {
+        id: "desarrollo-unreal",
         titulo: "Desarrollo Unreal",
-        descripcion: "Desarrollo de experiencias y videojuegos con Unreal Engine. Gráficos de alta fidelidad, cinematicas interactivas y experiencias inmersivas para PC y Realidad Virtual.",
+        descripcionCorta: "Desarrollo de experiencias y videojuegos con Unreal Engine. Gráficos de alta fidelidad, cinemáticas interactivas y experiencias inmersivas para PC y Realidad Virtual.",
         icono: "UE",
         tecnologias: [TECNOLOGIAS.UNREAL_ENGINE, TECNOLOGIAS.GAMEDEV, TECNOLOGIAS.BLENDER],
         plataformas: ["Windows", "Quest"],
+        descripcionExtensa: "Para proyectos que requieren el máximo nivel visual. Cinemáticas interactivas, arquitectural visualizations de altísima calidad, experiencias de Realidad Virtual con renderizado avançado, y videojuegos donde los gráficos son parte del valor del producto.",
+        proceso: [
+            "Concept art y referencias visuales",
+            "Blocking y prototyping en Unreal",
+            "Desarrollo de assets y world building",
+            "Implementación de gameplay y sistemas",
+            "Iluminación, post-processing y optimización",
+            "Packaging y despliegue",
+        ],
+        queNecesito: [
+            "Referencias visuales de la calidad esperada",
+            "Alcance del proyecto y features prioritarias",
+            "Hardware del usuario final (PC specs mínimas)",
+            "Necesidades de licensing (royalties Epic o no)",
+        ],
     },
 ];
 ---
@@ -58,26 +155,37 @@ const servicios = [
 
             <div class="servicios-grid">
                 {
-                    servicios.map((servicio) => (
-                        <article class="servicio-card">
-                            <div class="servicio-header">
-                                <div class="servicio-icono">
-                                    <span class="icono-texto">{servicio.icono}</span>
-                                </div>
-                                <h3 class="servicio-titulo">{servicio.titulo}</h3>
+                    servicios.map((servicio, index) => (
+                        <article
+                            class="servicio-card"
+                            data-target={`servicio-modal-${index}`}
+                        >
+                            <div class="servicio-icono">
+                                <span class="icono-texto">{servicio.icono}</span>
                             </div>
-                            <p class="servicio-descripcion">{servicio.descripcion}</p>
+                            <h3 class="servicio-titulo">{servicio.titulo}</h3>
+                            <p class="servicio-descripcion">{servicio.descripcionCorta}</p>
                             <div class="servicio-techs">
                                 {
-                                    servicio.tecnologias.map((tech) => (
+                                    servicio.tecnologias.slice(0, 3).map((tech) => (
                                         <TechTag name={tech} size="sm" />
                                     ))
                                 }
+                                {servicio.tecnologias.length > 3 && (
+                                    <span class="tech-more">+{servicio.tecnologias.length - 3}</span>
+                                )}
                             </div>
                             <div class="servicio-plataformas">
                                 {servicio.plataformas.map((plataforma) => (
                                     <span class="plataforma-tag">{plataforma}</span>
                                 ))}
+                            </div>
+                            <div class="card-cta">
+                                <span>Ver detalles</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
                             </div>
                         </article>
                     ))
@@ -86,6 +194,11 @@ const servicios = [
         </div>
     </div>
 </section>
+
+<!-- Modales separados en su propio componente -->
+{servicios.map((servicio, index) => (
+    <ServicioModal servicio={servicio} index={index} />
+))}
 
 <style>
     .section {
@@ -137,54 +250,76 @@ const servicios = [
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 16px;
         padding: 1.75rem;
-        transition: all 0.4s ease;
+        transition: all 0.35s ease;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.9rem;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .servicio-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ff3914, transparent);
+        opacity: 0;
+        transition: opacity 0.35s ease;
     }
 
     .servicio-card:hover {
-        transform: translateY(-6px);
+        transform: translateY(-8px);
         border-color: rgba(255, 57, 20, 0.5);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        box-shadow:
+            0 24px 48px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(255, 57, 20, 0.1);
         background: rgba(255, 255, 255, 0.06);
     }
 
-    .servicio-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
+    .servicio-card:hover::before {
+        opacity: 1;
     }
 
     .servicio-icono {
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, rgba(255, 57, 20, 0.2), rgba(255, 107, 74, 0.1));
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, rgba(255, 57, 20, 0.2), rgba(255, 107, 74, 0.08));
         border: 1px solid rgba(255, 57, 20, 0.3);
         border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+        transition: all 0.35s ease;
+    }
+
+    .servicio-card:hover .servicio-icono {
+        background: linear-gradient(135deg, rgba(255, 57, 20, 0.35), rgba(255, 107, 74, 0.15));
+        transform: scale(1.05);
     }
 
     .icono-texto {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         font-weight: 700;
         color: #ff3914;
         letter-spacing: 1px;
     }
 
     .servicio-titulo {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         color: #ffffff;
         margin: 0;
         font-weight: 600;
+        line-height: 1.3;
     }
 
     .servicio-descripcion {
-        font-size: 0.9rem;
-        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.55);
         line-height: 1.6;
         margin: 0;
         flex-grow: 1;
@@ -193,27 +328,51 @@ const servicios = [
     .servicio-techs {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.4rem;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .tech-more {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.4);
+        padding: 0.15rem 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
     }
 
     .servicio-plataformas {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-top: auto;
+        gap: 0.35rem;
         padding-top: 0.5rem;
         border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .plataforma-tag {
-        font-size: 0.7rem;
-        color: rgba(255, 255, 255, 0.5);
-        padding: 0.25rem 0.6rem;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 6px;
+        font-size: 0.6rem;
+        color: rgba(255, 255, 255, 0.45);
+        padding: 0.15rem 0.45rem;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 4px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+    }
+
+    .card-cta {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        color: #ff3914;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-top: auto;
+        padding-top: 0.5rem;
+        transition: gap 0.3s ease;
+    }
+
+    .servicio-card:hover .card-cta {
+        gap: 0.7rem;
     }
 
     @media (max-width: 1024px) {
@@ -233,6 +392,7 @@ const servicios = [
 
         .servicios-grid {
             grid-template-columns: 1fr;
+            gap: 1.25rem;
         }
 
         .servicio-card {
@@ -240,3 +400,77 @@ const servicios = [
         }
     }
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".servicio-card");
+        const closeBtns = document.querySelectorAll(".close-modal-btn, .close-modal-btn-2");
+        const contactBtns = document.querySelectorAll(".contact-service-btn");
+
+        // Open modal
+        cards.forEach((card) => {
+            card.addEventListener("click", () => {
+                const targetId = card.getAttribute("data-target");
+                if (targetId) {
+                    const modal = document.getElementById(targetId) as HTMLDialogElement;
+                    if (modal) {
+                        modal.showModal();
+                        document.body.style.overflow = "hidden";
+                    }
+                }
+            });
+        });
+
+        // Close modal
+        const closeModal = (dialog: HTMLDialogElement) => {
+            dialog.close();
+            document.body.style.overflow = "";
+        };
+
+        closeBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const modal = btn.closest("dialog");
+                if (modal) closeModal(modal as HTMLDialogElement);
+            });
+        });
+
+        // Close on backdrop click
+        document.querySelectorAll(".servicio-modal").forEach((dialog) => {
+            dialog.addEventListener("click", (e: Event) => {
+                const rect = (dialog as HTMLDialogElement).getBoundingClientRect();
+                const mouseEvent = e as MouseEvent;
+                const isInDialog =
+                    rect.top <= mouseEvent.clientY &&
+                    mouseEvent.clientY <= rect.top + rect.height &&
+                    rect.left <= mouseEvent.clientX &&
+                    mouseEvent.clientX <= rect.left + rect.width;
+
+                if (!isInDialog) {
+                    (dialog as HTMLDialogElement).close();
+                    document.body.style.overflow = "";
+                }
+            });
+        });
+
+        // Contact button: prefill form and scroll
+        contactBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const serviceId = btn.getAttribute("data-service");
+                const serviceName = btn.getAttribute("data-service-name");
+
+                console.log("[Servicios] Contact btn clicked, serviceId:", serviceId, "serviceName:", serviceName);
+                sessionStorage.setItem("selectedService", serviceId || "");
+                sessionStorage.setItem("selectedServiceName", serviceName || "");
+                console.log("[Servicios] sessionStorage set:", sessionStorage.getItem("selectedService"));
+
+                const modal = btn.closest("dialog");
+                if (modal) closeModal(modal as HTMLDialogElement);
+
+                const contactSection = document.getElementById("contacto");
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: "smooth" });
+                }
+            });
+        });
+    });
+</script>

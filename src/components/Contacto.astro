@@ -44,6 +44,20 @@ import { redesSociales } from "../data/redes";
         <div class="contact-form-wrapper">
           <form class="contact-form" id="contact-form">
             <div class="form-group">
+              <label for="servicio">Servicio de interés</label>
+              <select id="servicio" name="servicio" class="servicio-select">
+                <option value="">Selecciona un servicio (opcional)</option>
+                <option value="realidad-aumentada">Realidad Aumentada</option>
+                <option value="realidad-virtual">Realidad Virtual</option>
+                <option value="realidad-mixta">Realidad Mixta</option>
+                <option value="web-3d">Web 3D e Interactiva</option>
+                <option value="desarrollo-unity">Desarrollo Unity</option>
+                <option value="desarrollo-unreal">Desarrollo Unreal</option>
+                <option value="otro">Otro / No estoy seguro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
               <label for="nombre">Nombre</label>
               <input
                 type="text"
@@ -264,6 +278,34 @@ import { redesSociales } from "../data/redes";
     min-height: 120px;
   }
 
+  .servicio-select {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 1rem;
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .servicio-select option {
+    background: #1a1a2e;
+    color: #fff;
+  }
+
+  .servicio-select:focus {
+    border-color: #ff3914;
+    background-color: rgba(255, 57, 20, 0.08);
+  }
+
   .submit-btn {
     display: flex;
     align-items: center;
@@ -346,10 +388,45 @@ import { redesSociales } from "../data/redes";
 </style>
 
 <script>
+  // Prefill on script load (if user navigated directly to contact or already has value)
+  (function prefillService() {
+    const servicioSelect = document.getElementById("servicio") as HTMLSelectElement;
+    const selectedService = sessionStorage.getItem("selectedService");
+
+    if (selectedService && servicioSelect) {
+      servicioSelect.value = selectedService;
+      sessionStorage.removeItem("selectedService");
+      sessionStorage.removeItem("selectedServiceName");
+    }
+  })();
+
+  // Listen for storage changes from other tabs/pages (or our own tab via same-event)
+  window.addEventListener("storage", (e) => {
+    if (e.key === "selectedService" && e.newValue) {
+      const servicioSelect = document.getElementById("servicio") as HTMLSelectElement;
+      if (servicioSelect) {
+        servicioSelect.value = e.newValue;
+        sessionStorage.removeItem("selectedService");
+        sessionStorage.removeItem("selectedServiceName");
+      }
+    }
+  });
+
+  // Poll for sessionStorage changes within same tab (since storage event only fires across tabs)
+  setInterval(() => {
+    const servicioSelect = document.getElementById("servicio") as HTMLSelectElement;
+    const selectedService = sessionStorage.getItem("selectedService");
+    if (selectedService && servicioSelect && servicioSelect.value !== selectedService) {
+      servicioSelect.value = selectedService;
+      sessionStorage.removeItem("selectedService");
+      sessionStorage.removeItem("selectedServiceName");
+    }
+  }, 300);
+
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("contact-form") as HTMLFormElement;
     const submitBtn = form.querySelector(".submit-btn") as HTMLButtonElement;
-    
+
     if (form && submitBtn) {
       const originalBtnContent = submitBtn.innerHTML;
 

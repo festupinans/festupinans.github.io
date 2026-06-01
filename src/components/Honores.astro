@@ -1,0 +1,190 @@
+---
+// Honores.astro
+import EmpresaButton from './EmpresaButton.astro';
+import { honores } from "../data/honores";
+---
+
+<section id="honores" class="section">
+    <div class="glass-wrapper">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-accent">//</span> Honores y Premios
+            </h2>
+
+            <div class="honores-grid">
+                {
+                    honores.map((honor) => (
+                        <div class="honor-card">
+                            <div class="honor-tipo">
+                                <span class="tipo-badge">{honor.tipo}</span>
+                            </div>
+                            <div class="honor-info">
+                                <h3 class="honor-nombre">{honor.nombre}</h3>
+                                <p class="honor-proyecto">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    >
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                    {honor.proyecto}
+                                </p>
+                                <div class="honor-empresa">
+                                    <EmpresaButton empresa={honor.empresa} />
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            {honores.length === 0 && (
+                <p class="empty-message">Muy pronto...</p>
+            )}
+        </div>
+    </div>
+</section>
+
+<style>
+    .section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 2rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .glass-wrapper {
+        backdrop-filter: blur(13px);
+        -webkit-backdrop-filter: blur(13px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 3rem;
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        max-width: 1100px;
+        width: 100%;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+        color: #ffffff;
+        margin-bottom: 3rem;
+        font-weight: 700;
+    }
+
+    .title-accent {
+        color: #ff3914;
+    }
+
+    .honores-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .honor-card {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 1.5rem 2rem;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .honor-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 57, 20, 0.4);
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(255, 57, 20, 0.15);
+    }
+
+    .honor-tipo {
+        display: flex;
+    }
+
+    .tipo-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ff3914;
+        background: rgba(255, 57, 20, 0.15);
+        border: 1px solid rgba(255, 57, 20, 0.3);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+    }
+
+    .honor-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .honor-nombre {
+        font-size: 1.2rem;
+        color: #ffffff;
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .honor-proyecto {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .honor-proyecto svg {
+        color: #ff3914;
+        flex-shrink: 0;
+    }
+
+    .honor-empresa {
+        display: flex;
+        align-items: center;
+    }
+
+    .empty-message {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 1.1rem;
+        padding: 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .section {
+            padding: 5rem 1rem;
+        }
+
+        .glass-wrapper {
+            padding: 2rem 1.5rem;
+        }
+
+        .honores-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .honor-card {
+            padding: 1.25rem 1.5rem;
+        }
+    }
+</style>

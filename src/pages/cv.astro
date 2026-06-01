@@ -5,6 +5,7 @@ import { TECNOLOGIAS } from "../data/tecnologias";
 import { experiencias } from "../data/experiencias";
 import { educacion } from "../data/educacion";
 import { proyectos } from "../data/proyectos";
+import { honores } from "../data/honores";
 
 const perfil = {
   nombre: "Francisco Estupiñán",
@@ -155,6 +156,22 @@ const skills = {
                     <span class="exp-periodo">{exp.periodo}</span>
                   </div>
                   <p class="exp-descripcion">{exp.descripcion.split(".")[0]}.</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="main-section">
+          <h2 class="section-title">Honores y Premios</h2>
+          <div class="honores-list">
+            {
+              honores.map((honor) => (
+                <div class="honor-item">
+                  <span class="honor-tipo">{honor.tipo}</span>
+                  <h3 class="honor-nombre">{honor.nombre}</h3>
+                  <p class="honor-proyecto">{honor.proyecto}</p>
+                  <p class="honor-empresa">{honor.empresa.nombre}</p>
                 </div>
               ))
             }
@@ -510,6 +527,45 @@ const skills = {
     margin: 0 0 0.6rem;
   }
 
+  /* ── Honores ── */
+  .honores-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .honor-item {
+    border-left: 3px solid #ff3914;
+    padding-left: 1rem;
+  }
+
+  .honor-tipo {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ff3914;
+  }
+
+  .honor-nombre {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0.2rem 0;
+  }
+
+  .honor-proyecto {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0;
+  }
+
+  .honor-empresa {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0.2rem 0 0;
+  }
+
   @media print {
     .cv-sheet-wrapper {
       background: #1a1a1a !important;
@@ -608,6 +664,22 @@ const skills = {
 
     .exp-descripcion {
       color: #bbb !important;
+    }
+
+    .honor-tipo {
+      color: #ff3914 !important;
+    }
+
+    .honor-nombre {
+      color: #fff !important;
+    }
+
+    .honor-proyecto {
+      color: #aaa !important;
+    }
+
+    .honor-empresa {
+      color: #888 !important;
     }
 
     .cv-main {

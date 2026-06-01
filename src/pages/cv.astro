@@ -1,0 +1,645 @@
+---
+import CVLayout from "../layouts/CVLayout.astro";
+import { redesSociales } from "../data/redes";
+import { TECNOLOGIAS } from "../data/tecnologias";
+import { experiencias } from "../data/experiencias";
+import { educacion } from "../data/educacion";
+import { proyectos } from "../data/proyectos";
+
+const perfil = {
+  nombre: "Francisco Estupiñán",
+  titulo: "Desarrollador XR · Desarrollador Web Full Stack",
+  sobreMi:
+    "Especialista en diseño y desarrollo de soluciones multiplataforma (Web, Mobile, Desktop) con enfoque en Realidades Extendidas (VR, AR, MR) y creación de Metaversos. Experto en Unity/C#, Three.js, WebGL/WebGPU para experiencias 3D de alto rendimiento. Líder en la aplicación de gamificación para sectores educativos y empresariales.",
+};
+
+// Unique tech categories for clean display
+const skills = {
+  motores: [TECNOLOGIAS.UNITY, TECNOLOGIAS.UNREAL_ENGINE],
+  lenguajes: [TECNOLOGIAS.JAVASCRIPT, TECNOLOGIAS.TYPESCRIPT, TECNOLOGIAS.PYTHON, TECNOLOGIAS.C_SHARP],
+  web: [TECNOLOGIAS.NODEJS, TECNOLOGIAS.REACT, TECNOLOGIAS.ASTRO, TECNOLOGIAS.VITE, TECNOLOGIAS.FIREBASE],
+  grafica: [TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.THREEJS],
+  xr: [TECNOLOGIAS.WEBXR, TECNOLOGIAS.AR, TECNOLOGIAS.VR, TECNOLOGIAS.GAMEDEV],
+  diseno: [TECNOLOGIAS.ILLUSTRATOR, TECNOLOGIAS.PHOTOSHOP, TECNOLOGIAS.SKETCHUP, TECNOLOGIAS.BLENDER],
+};
+---
+
+<CVLayout>
+  <div class="cv-sheet-wrapper">
+    <div class="cv-page">
+    <header class="cv-header">
+      <div class="header-inner">
+        <h1 class="cv-nombre">{perfil.nombre}</h1>
+        <p class="cv-titulo">{perfil.titulo}</p>
+        <div class="cv-contact">
+          {
+            redesSociales.map((red) => (
+              <a href={red.url} class="contact-link" target="_blank" rel="noopener noreferrer">
+                <span set:html={red.icon} />
+                <span class="contact-label">
+                  {red.nombre === "Email"
+                    ? "franciscoestupinan4@gmail.com"
+                    : red.nombre === "GitHub"
+                      ? "festupinans"
+                      : red.nombre === "LinkedIn"
+                        ? "festupinans"
+                        : red.nombre}
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="cv-body">
+      <!-- Left Sidebar -->
+      <aside class="cv-sidebar">
+        <section class="sidebar-section">
+          <h2 class="sidebar-title">Skills</h2>
+          <div class="skills-categories">
+            <div class="skill-group">
+              <p class="skill-cat-title">Motores</p>
+              <div class="skills-grid">
+                {skills.motores.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-cat-title">Lenguajes</p>
+              <div class="skills-grid">
+                {skills.lenguajes.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-cat-title">Web</p>
+              <div class="skills-grid">
+                {skills.web.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-cat-title">Gráfica</p>
+              <div class="skills-grid">
+                {skills.grafica.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-cat-title">XR</p>
+              <div class="skills-grid">
+                {skills.xr.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-cat-title">Diseño</p>
+              <div class="skills-grid">
+                {skills.diseno.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-section">
+          <h2 class="sidebar-title">Idiomas</h2>
+          <div class="idiomas">
+            <div class="idioma-item">
+              <span class="idioma-nombre">Español</span>
+              <span class="idioma-nivel">Nativo</span>
+            </div>
+            <div class="idioma-item">
+              <span class="idioma-nombre">Inglés</span>
+              <span class="idioma-nivel">B2 — B2+</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sidebar-section">
+          <h2 class="sidebar-title">Educación</h2>
+          <div class="sidebar-educacion">
+            {
+              educacion.map((edu) => (
+                <div class="sidebar-edu-item">
+                  <p class="edu-titulo">{edu.titulo}</p>
+                  <p class="edu-institucion">{edu.institucion}</p>
+                  <p class="edu-periodo">{edu.periodo}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="cv-main">
+        <section class="main-section">
+          <h2 class="section-title">Perfil Profesional</h2>
+          <p class="perfil-text">{perfil.sobreMi}</p>
+        </section>
+
+        <section class="main-section">
+          <h2 class="section-title">Experiencia</h2>
+          <div class="experiencia-list">
+            {
+              experiencias.map((exp) => (
+                <div class="experiencia-item">
+                  <div class="exp-header">
+                    <div class="exp-left">
+                      <h3 class="exp-cargo">{exp.cargo}</h3>
+                      <a
+                        href={exp.empresa.url}
+                        class="exp-empresa"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {exp.empresa.nombre}
+                      </a>
+                    </div>
+                    <span class="exp-periodo">{exp.periodo}</span>
+                  </div>
+                  <p class="exp-descripcion">{exp.descripcion.split(".")[0]}.</p>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+
+        <!-- <section class="main-section">
+          <h2 class="section-title">Proyectos</h2>
+          <div class="proyectos-list">
+            {
+              proyectos.map((proy) => (
+                <div class="proyecto-item">
+                  <div class="proy-header">
+                    <h3 class="proy-titulo">{proy.titulo}</h3>
+                    {proy.empresa && (
+                      <span class="proy-empresa">{proy.empresa.nombre}</span>
+                    )}
+                  </div>
+                  <p class="proy-descripcion">{proy.descripcion}</p>
+                </div>
+              ))
+            }
+          </div>
+        </section> -->
+      </main>
+    </div>
+  </div>
+</CVLayout>
+
+<style>
+  .cv-sheet-wrapper {
+    background: #d0d0d0;
+    padding: 2.5rem 1.5rem;
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+  }
+
+  .cv-page {
+    background: #fff;
+    color: #111;
+    width: 100%;
+    max-width: 816px; /* ~Letter width in px at 96dpi */
+    min-height: calc(100vh - 60px - 5rem);
+    padding-top: 60px; /* cv-navbar height */
+  }
+
+  /* ── Header ── */
+  .cv-header {
+    background: #000;
+    color: #fff;
+    padding: 3rem 2rem;
+    border-bottom: 4px solid #ff3914;
+  }
+
+  .header-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .cv-nombre {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+    color: #fff;
+  }
+
+  .cv-titulo {
+    font-size: 1.1rem;
+    color: #ff3914;
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+  }
+
+  .cv-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover {
+    color: #ff3914;
+  }
+
+  .contact-link :global(svg) {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  /* ── Body: Two columns ── */
+  .cv-body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    min-height: calc(100vh - 70px - 200px);
+  }
+
+  /* ── Sidebar ── */
+  .cv-sidebar {
+    background: #f5f5f5;
+    border-right: 2px solid #e0e0e0;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .sidebar-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .sidebar-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidebar-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #ff3914;
+    margin: 0 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #ff3914;
+  }
+
+  .skills-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .skill-cat-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin: 0;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .skill-tag {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
+    background: #000;
+    color: #fff;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .idiomas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .idioma-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .idioma-nombre {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .idioma-nivel {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .sidebar-educacion {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .sidebar-edu-item {
+    border-left: 3px solid #ff3914;
+    padding-left: 0.75rem;
+  }
+
+  .edu-titulo {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 0.2rem;
+  }
+
+  .edu-institucion {
+    font-size: 0.78rem;
+    color: #555;
+    margin: 0 0 0.2rem;
+  }
+
+  .edu-periodo {
+    font-size: 0.72rem;
+    color: #ff3914;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* ── Main ── */
+  .cv-main {
+    padding: 2.5rem 2.5rem;
+  }
+
+  .main-section {
+    margin-bottom: 2.5rem;
+  }
+
+  .main-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #000;
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #000;
+  }
+
+  .perfil-text {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #333;
+    margin: 0;
+  }
+
+  /* ── Experiencia ── */
+  .experiencia-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .experiencia-item {
+    border-left: 3px solid #ff3914;
+    padding-left: 1.25rem;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .exp-cargo {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+  .exp-empresa {
+    font-size: 0.85rem;
+    color: #ff3914;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .exp-empresa:hover {
+    text-decoration: underline;
+  }
+
+  .exp-periodo {
+    font-size: 0.78rem;
+    color: #888;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .exp-descripcion {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #444;
+    margin: 0 0 0.75rem;
+  }
+
+  /* ── Proyectos ── */
+  .proyectos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .proyecto-item {
+    border-left: 3px solid #000;
+    padding-left: 1.25rem;
+  }
+
+  .proy-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .proy-titulo {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+  }
+
+  .proy-empresa {
+    font-size: 0.78rem;
+    color: #ff3914;
+    font-weight: 500;
+  }
+
+  .proy-descripcion {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #444;
+    margin: 0 0 0.6rem;
+  }
+
+  @media print {
+    .cv-sheet-wrapper {
+      background: #1a1a1a !important;
+      padding: 0 !important;
+    }
+
+    .cv-page {
+      background: #1a1a1a !important;
+      color: #fff !important;
+      border-radius: 0 !important;
+    }
+
+    .cv-header {
+      background: #000 !important;
+      border-bottom: 4px solid #ff3914 !important;
+    }
+
+    .cv-nombre {
+      color: #fff !important;
+    }
+
+    .cv-titulo {
+      color: #ff3914 !important;
+    }
+
+    .contact-link {
+      color: rgba(255,255,255,0.7) !important;
+    }
+
+    .cv-sidebar {
+      background: #222 !important;
+      border-right: 2px solid #ff3914 !important;
+    }
+
+    .sidebar-title {
+      color: #ff3914 !important;
+    }
+
+    .skill-cat-title {
+      color: #aaa !important;
+    }
+
+    .skill-tag {
+      background: #333 !important;
+      color: #fff !important;
+    }
+
+    .idioma-nombre {
+      color: #fff !important;
+    }
+
+    .idioma-nivel {
+      color: #aaa !important;
+    }
+
+    .sidebar-edu-item {
+      border-left: 3px solid #ff3914 !important;
+    }
+
+    .edu-titulo {
+      color: #fff !important;
+    }
+
+    .edu-institucion {
+      color: #aaa !important;
+    }
+
+    .edu-periodo {
+      color: #ff3914 !important;
+    }
+
+    .section-title {
+      color: #fff !important;
+      border-bottom: 2px solid #fff !important;
+    }
+
+    .perfil-text {
+      color: #ccc !important;
+    }
+
+    .experiencia-item {
+      border-left: 3px solid #ff3914 !important;
+    }
+
+    .exp-cargo {
+      color: #fff !important;
+    }
+
+    .exp-empresa {
+      color: #ff3914 !important;
+    }
+
+    .exp-periodo {
+      color: #aaa !important;
+    }
+
+    .exp-descripcion {
+      color: #bbb !important;
+    }
+
+    .cv-main {
+      padding: 2rem 2rem;
+    }
+
+    .main-section {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .cv-body {
+      grid-template-columns: 1fr;
+    }
+
+    .cv-sidebar {
+      border-right: none;
+      border-bottom: 2px solid #e0e0e0;
+      padding: 2rem 1.5rem;
+    }
+
+    .cv-main {
+      padding: 2rem 1.5rem;
+    }
+
+    .cv-header {
+      padding: 2rem 1.5rem;
+    }
+
+    .exp-header {
+      flex-direction: column;
+    }
+  }
+</style>

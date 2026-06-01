@@ -53,6 +53,9 @@
                     >Contacto</a
                 >
             </li>
+            <li>
+                <a href="/cv" class="nav-link">CV</a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -321,6 +324,13 @@
             closeMenu();
 
             const targetId = link.getAttribute("href") ?? "#";
+
+            // Skip non-anchor links (e.g. /cv, external URLs)
+            if (!targetId.startsWith("#")) {
+                window.location.href = targetId;
+                return;
+            }
+
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {

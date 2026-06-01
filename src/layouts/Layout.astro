@@ -8,11 +8,32 @@ import NavBar from "../components/NavBar.astro";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" href="/Img/Favicon.webp" />
+		<link rel="apple-touch-icon" href="/Img/Favicon.webp" />
 		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content="Portafolio profesional - Desarrollador XR"
-		/>
+
+		<!-- Primary SEO -->
+		<meta name="author" content="Francisco Eduardo Estupiñan Sanchez" />
+		<meta name="robots" content="index, follow" />
+		<meta name="keywords" content="Francisco Estupiñán, Francisco Eduardo Estupiñan Sanchez, Desarrollador XR, XR Developer, VR, AR, Realidad Virtual, Realidad Aumentada, Unity, Three.js, WebGL, Metaverse, Portfolio, Desarrollador Web, Full Stack, Colombia" />
+		<link rel="canonical" href="https://pachodev.netlify.app/" />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://pachodev.netlify.app/" />
+		<meta property="og:title" content="Francisco Estupiñán | Desarrollador XR · Portfolio" />
+		<meta property="og:description" content="Portfolio de Francisco Eduardo Estupiñan Sanchez — Desarrollador XR especializado en Realidades Extendidas, WebGL, Unity y experiencias 3D de alto rendimiento." />
+		<meta property="og:image" content="https://pachodev.netlify.app/Img/Favicon.webp" />
+		<meta property="og:image:width" content="512" />
+		<meta property="og:image:height" content="512" />
+		<meta property="og:locale" content="es_CO" />
+		<meta property="og:site_name" content="Francisco Estupiñán - Portfolio" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:creator" content="@festupinans" />
+		<meta name="twitter:title" content="Francisco Estupiñán | Desarrollador XR · Portfolio" />
+		<meta name="twitter:description" content="Portfolio de Francisco Eduardo Estupiñan Sanchez — Desarrollador XR especializado en Realidades Extendidas, WebGL, Unity y experiencias 3D de alto rendimiento." />
+		<meta name="twitter:image" content="https://pachodev.netlify.app/Img/Favicon.webp" />
 
 		<!-- Google Fonts -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,7 +43,26 @@ import NavBar from "../components/NavBar.astro";
 			rel="stylesheet"
 		/>
 
-		<title>Francisco Estupiñán | Desarrollador XR</title>
+		<!-- Structured Data (JSON-LD) -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "Francisco Eduardo Estupiñan Sanchez",
+				"alternateName": ["Francisco Estupiñán", "Pacho Dev"],
+				"url": "https://pachodev.netlify.app/",
+				"sameAs": [
+					"https://www.linkedin.com/in/festupinans",
+					"https://github.com/festupinans"
+				],
+				"jobTitle": "Desarrollador XR · Desarrollador Web Full Stack",
+				"description": "Especialista en diseño y desarrollo de soluciones multiplataforma (Web, Mobile, Desktop) con enfoque en Realidades Extendidas (VR, AR, MR) y creación de Metaversos. Experto en Unity/C#, Three.js, WebGL/WebGPU para experiencias 3D de alto rendimiento.",
+				"knowsAbout": ["XR", "VR", "AR", "Unity", "Three.js", "WebGL", "WebGPU", "React", "Astro", "Node.js"],
+				"areaServed": "Colombia"
+			}
+		</script>
+
+		<title>Francisco Estupiñán | Desarrollador XR · Portfolio</title>
 	</head>
 	<body>
 		<NavBar />

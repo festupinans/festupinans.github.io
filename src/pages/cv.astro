@@ -9,9 +9,9 @@ import { honores } from "../data/honores";
 
 const perfil = {
   nombre: "Francisco Estupiñán",
-  titulo: "Desarrollador XR · Desarrollador Web Full Stack",
+  titulo: "Desarrollador XR · IA & Agentes",
   sobreMi:
-    "Especialista en diseño y desarrollo de soluciones multiplataforma (Web, Mobile, Desktop) con enfoque en Realidades Extendidas (VR, AR, MR) y creación de Metaversos. Experto en Unity/C#, Three.js, WebGL/WebGPU para experiencias 3D de alto rendimiento. Líder en la aplicación de gamificación para sectores educativos y empresariales.",
+    "Especialista en diseño y desarrollo de soluciones multiplataforma (Web, Mobile, Desktop) con enfoque en Realidades Extendidas (VR, AR, MR) y creación de Metaversos. Experto en Unity/C#, Three.js, WebGL/WebGPU para experiencias 3D de alto rendimiento. Líder en la aplicación de gamificación para sectores educativos y empresariales. Diseño e implemento soluciones de Inteligencia Artificial: agentes, sistemas RAG, Skills y herramientas conectadas vía MCP, ejecutables en la nube o 100% en local con modelos open-source (LLaMA, Mistral, Qwen) servidos con Ollama o vLLM.",
 };
 
 // Unique tech categories for clean display
@@ -21,6 +21,7 @@ const skills = {
   web: [TECNOLOGIAS.NODEJS, TECNOLOGIAS.REACT, TECNOLOGIAS.ASTRO, TECNOLOGIAS.VITE, TECNOLOGIAS.FIREBASE],
   grafica: [TECNOLOGIAS.WEBGL, TECNOLOGIAS.WEBGPU, TECNOLOGIAS.THREEJS],
   xr: [TECNOLOGIAS.WEBXR, TECNOLOGIAS.AR, TECNOLOGIAS.VR, TECNOLOGIAS.GAMEDEV],
+  ia: [TECNOLOGIAS.IA, TECNOLOGIAS.MCP, TECNOLOGIAS.RAG, TECNOLOGIAS.LANGCHAIN, TECNOLOGIAS.OLLAMA, TECNOLOGIAS.LLAMA, TECNOLOGIAS.LLAMA_CPP],
   diseno: [TECNOLOGIAS.ILLUSTRATOR, TECNOLOGIAS.PHOTOSHOP, TECNOLOGIAS.SKETCHUP, TECNOLOGIAS.BLENDER],
 };
 ---
@@ -93,6 +94,12 @@ const skills = {
               <p class="skill-cat-title">XR</p>
               <div class="skills-grid">
                 {skills.xr.map((s) => <span class="skill-tag">{s}</span>)}
+              </div>
+            </div>
+            <div class="skill-group">
+              <p class="skill-cat-title">IA & Agentes</p>
+              <div class="skills-grid">
+                {skills.ia.map((s) => <span class="skill-tag">{s}</span>)}
               </div>
             </div>
             <div class="skill-group">

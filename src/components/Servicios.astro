@@ -143,6 +143,29 @@ const servicios = [
             "Necesidades de licensing (royalties Epic o no)",
         ],
     },
+    {
+        id: "inteligencia-artificial",
+        titulo: "Inteligencia Artificial",
+        descripcionCorta: "Desarrollo de soluciones de IA: agentes, RAG, skills y herramientas con MCP, ejecutables en la nube o 100% en local con modelos open-source.",
+        icono: "AI",
+        tecnologias: [TECNOLOGIAS.IA, TECNOLOGIAS.MCP, TECNOLOGIAS.RAG, TECNOLOGIAS.OLLAMA, TECNOLOGIAS.LLAMA, TECNOLOGIAS.LLAMA_CPP, TECNOLOGIAS.LANGCHAIN, TECNOLOGIAS.PYTHON, TECNOLOGIAS.TYPESCRIPT, TECNOLOGIAS.NODEJS, TECNOLOGIAS.REACT],
+        plataformas: ["Cloud", "Local", "Web", "Desktop"],
+        descripcionExtensa: "Diseño y construyo sistemas de IA a la medida. Desde agentes que automatizan flujos de trabajo, hasta asistentes que consultan tu propia base de conocimiento con RAG, hasta Skills especializados y herramientas conectadas vía MCP (Model Context Protocol) para que los modelos extiendan sus capacidades sin reentrenar. Todo puede correr en la nube con modelos de frontera (OpenAI, Anthropic, Google, etc.) o desplegarse 100% en local con modelos open-source como LLaMA, Mistral o Qwen servidos con Ollama, vLLM o directamente con llama.cpp (C/C++ de ggml-org, base del ecosistema local: LM Studio, koboldcpp, llamafile), manteniendo privacidad total de los datos y costes de inferencia bajo control.",
+        proceso: [
+            "Discovery del problema y datos disponibles",
+            "Diseño de arquitectura (agentes, RAG, tools, memoria)",
+            "Selección de modelo: cloud o local según privacidad, coste y latencia",
+            "Implementación de Skills, tools y conectores MCP",
+            "Pipeline de RAG: embeddings, vector store, retrieval y re-ranking",
+            "Evaluación, hardening y despliegue (API, web, escritorio o embebido)",
+        ],
+        queNecesito: [
+            "Descripción clara del caso de uso y el resultado esperado",
+            "Fuentes de conocimiento si se requiere RAG (PDFs, docs, bases de datos, APIs)",
+            "Restricciones de privacidad, latencia, presupuesto o infraestructura",
+            "Preferencia entre cloud (rápido de arrancar) o local (privacidad y control)",
+        ],
+    },
 ];
 ---
 

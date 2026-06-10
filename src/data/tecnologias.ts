@@ -33,6 +33,12 @@ export const TECNOLOGIAS = {
     WEB: "Web",
     BLENDER: "Blender",
     VITE: "Vite",
+    MCP: "MCP",
+    RAG: "RAG",
+    OLLAMA: "Ollama",
+    LLAMA: "LLaMA",
+    LLAMA_CPP: "Llama C++",
+    LANGCHAIN: "LangChain",
 } as const;
 
 // Tipo extraído del objeto para usarlo en TypeScript

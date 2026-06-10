@@ -37,5 +37,14 @@ export const proyectos: Proyecto[] = [
         esWebAR: true,
         enlaceAR: "https://newrona.net/tarjeta-navidad-newrona/", // Cambiar por el link real
         marcadorAR: "/Img/Proyectos/RA_M.webp", // Cambiar por la imagen real del marcador
+    },
+    {
+        titulo: "Realidad Virtual - El viajero",
+        empresa: EMPRESAS.LIGHT_SKILLS_DOJO,
+        descripcion: "Proyecto en progreso enfocado en llevar a 'El Viajero', icónico personaje interactivo de Sako Asko, hacia la Realidad Virtual mediante conceptos visuales y diseño inmersivo.",
+        descripcionExtensa: "El Viajero VR es un proyecto en desarrollo que explora la transición del icónico personaje 'El Viajero', creado por el artista Sako Asko, al mundo de la realidad virtual. Su objetivo principal es traducir el lenguaje visual y la esencia simbólica del personaje en una experiencia profundamente inmersiva.\n\nEsta fase del desarrollo se centra fundamentalmente en el concepto visual de la experiencia. En ella se destaca el diseño de atmósferas adaptadas a entornos 3D, el estilo visual característico del artista, y las primeras exploraciones artísticas que sientan las bases sólidas para el futuro desarrollo interactivo del proyecto.",
+        imagen:"/Img/Proyectos/VIA_2.webp",
+        imagenes:["/Img/Proyectos/VIA_1.gif", "/Img/Proyectos/VIA_2.webp", "/Img/Proyectos/VIA_3.webp", "/Img/Proyectos/VIA_4.gif", "/Img/Proyectos/VIA_5.gif", "/Img/Proyectos/VIA_6.gif"],
+        tecnologias: [TECNOLOGIAS.VR, TECNOLOGIAS.UNREAL_ENGINE, TECNOLOGIAS.BLENDER, TECNOLOGIAS.GAMEDEV], 
     }
 ];

@@ -66,7 +66,7 @@ const skills = {
               </div>
             </div>
             <div class="skill-group">
-              <p class="skill-cat-title">Lenguajes</p>
+              <p class="skill-cat-title">Lenguajes Principales</p>
               <div class="skills-grid">
                 {skills.lenguajes.map((s) => <span class="skill-tag">{s}</span>)}
               </div>
@@ -130,12 +130,12 @@ const skills = {
 
       <!-- Main Content -->
       <main class="cv-main">
-        <section class="main-section">
+        <section class="main-section perfil-section">
           <h2 class="section-title">Perfil Profesional</h2>
           <p class="perfil-text">{perfil.sobreMi}</p>
         </section>
 
-        <section class="main-section">
+        <section class="main-section experiencia-section">
           <h2 class="section-title">Experiencia</h2>
           <div class="experiencia-list">
             {
@@ -162,7 +162,7 @@ const skills = {
           </div>
         </section>
 
-        <section class="main-section">
+        <section class="main-section honores-section">
           <h2 class="section-title">Honores y Premios</h2>
           <div class="honores-list">
             {
@@ -568,126 +568,68 @@ const skills = {
 
   @media print {
     .cv-sheet-wrapper {
-      background: #1a1a1a !important;
+      background: #fff !important;
       padding: 0 !important;
+      min-height: unset !important;
+      display: block !important;
     }
 
     .cv-page {
-      background: #1a1a1a !important;
-      color: #fff !important;
+      background: #fff !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      min-height: unset !important;
+      padding-top: 0 !important;
+      margin: 0 !important;
+      box-shadow: none !important;
       border-radius: 0 !important;
     }
 
-    .cv-header {
-      background: #000 !important;
-      border-bottom: 4px solid #ff3914 !important;
-    }
-
-    .cv-nombre {
-      color: #fff !important;
-    }
-
-    .cv-titulo {
-      color: #ff3914 !important;
-    }
-
-    .contact-link {
-      color: rgba(255,255,255,0.7) !important;
+    .cv-body {
+      display: block !important;
+      grid-template-columns: none !important;
+      min-height: unset !important;
     }
 
     .cv-sidebar {
-      background: #222 !important;
-      border-right: 2px solid #ff3914 !important;
+      border-right: none !important;
+      border-bottom: 2px solid #e0e0e0 !important;
+      padding: 0.5rem 1.5rem !important;
     }
 
-    .sidebar-title {
-      color: #ff3914 !important;
+    .sidebar-section {
+      margin-bottom: 0.75rem !important;
     }
 
-    .skill-cat-title {
-      color: #aaa !important;
+    .cv-header {
+      padding: 0.75rem 2rem !important;
     }
 
-    .skill-tag {
-      background: #333 !important;
-      color: #fff !important;
+    .cv-nombre {
+      margin: 0 0 0.25rem !important;
     }
 
-    .idioma-nombre {
-      color: #fff !important;
-    }
-
-    .idioma-nivel {
-      color: #aaa !important;
-    }
-
-    .sidebar-edu-item {
-      border-left: 3px solid #ff3914 !important;
-    }
-
-    .edu-titulo {
-      color: #fff !important;
-    }
-
-    .edu-institucion {
-      color: #aaa !important;
-    }
-
-    .edu-periodo {
-      color: #ff3914 !important;
-    }
-
-    .section-title {
-      color: #fff !important;
-      border-bottom: 2px solid #fff !important;
-    }
-
-    .perfil-text {
-      color: #ccc !important;
-    }
-
-    .experiencia-item {
-      border-left: 3px solid #ff3914 !important;
-    }
-
-    .exp-cargo {
-      color: #fff !important;
-    }
-
-    .exp-empresa {
-      color: #ff3914 !important;
-    }
-
-    .exp-periodo {
-      color: #aaa !important;
-    }
-
-    .exp-descripcion {
-      color: #bbb !important;
-    }
-
-    .honor-tipo {
-      color: #ff3914 !important;
-    }
-
-    .honor-nombre {
-      color: #fff !important;
-    }
-
-    .honor-proyecto {
-      color: #aaa !important;
-    }
-
-    .honor-empresa {
-      color: #888 !important;
+    .cv-titulo {
+      margin: 0 0 0.5rem !important;
     }
 
     .cv-main {
-      padding: 2rem 2rem;
+      padding: 0.5rem 2rem !important;
     }
 
     .main-section {
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.75rem !important;
+    }
+
+    .perfil-section,
+    .honores-section {
+      page-break-before: always !important;
+      break-before: page !important;
+    }
+
+    .experiencia-section {
+      page-break-after: always !important;
+      break-after: page !important;
     }
   }
 

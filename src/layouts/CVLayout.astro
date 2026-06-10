@@ -246,8 +246,7 @@
     /* ── Print styles ── */
     @page {
         size: letter;
-        margin: 0;
-        background: #1a1a1a;
+        margin: 0.25in;
     }
 
     @media print {
@@ -260,144 +259,13 @@
         }
 
         html, body {
-            width: 8.5in;
-            height: 11in;
-            background: #1a1a1a !important;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
+            width: auto;
+            background: #fff !important;
+            color: #111 !important;
         }
 
         header {
             display: none !important;
-        }
-
-        .cv-sheet-wrapper {
-            background: #1a1a1a !important;
-            padding: 0 !important;
-            min-height: unset !important;
-            display: block !important;
-        }
-
-        .cv-page {
-            background: #1a1a1a !important;
-            padding-top: 0 !important;
-            min-height: unset !important;
-            max-width: 8.5in !important;
-            box-shadow: none !important;
-            margin: 0 auto !important;
-            border-radius: 0 !important;
-        }
-
-        .cv-body {
-            display: grid !important;
-            grid-template-columns: 280px 1fr !important;
-        }
-
-        .cv-sidebar {
-            background: #222 !important;
-            border-right: 2px solid #ff3914 !important;
-        }
-
-        .cv-header {
-            background: #000 !important;
-            border-bottom: 4px solid #ff3914 !important;
-            break-after: avoid;
-        }
-
-        .cv-nombre {
-            color: #fff !important;
-        }
-
-        .cv-titulo {
-            color: #ff3914 !important;
-        }
-
-        .contact-link {
-            color: rgba(255,255,255,0.7) !important;
-        }
-
-        .sidebar-title {
-            color: #ff3914 !important;
-            border-bottom: 2px solid #ff3914 !important;
-        }
-
-        .skill-cat-title {
-            color: #aaa !important;
-        }
-
-        .skill-tag {
-            background: #333 !important;
-            color: #fff !important;
-        }
-
-        .idioma-nombre {
-            color: #fff !important;
-        }
-
-        .idioma-nivel {
-            color: #aaa !important;
-        }
-
-        .edu-titulo {
-            color: #fff !important;
-        }
-
-        .edu-institucion {
-            color: #aaa !important;
-        }
-
-        .edu-periodo {
-            color: #ff3914 !important;
-        }
-
-        .section-title {
-            color: #fff !important;
-            border-bottom: 2px solid #fff !important;
-        }
-
-        .perfil-text {
-            color: #ccc !important;
-        }
-
-        .experiencia-item {
-            border-left: 3px solid #ff3914 !important;
-        }
-
-        .exp-cargo {
-            color: #fff !important;
-        }
-
-        .exp-empresa {
-            color: #ff3914 !important;
-        }
-
-        .exp-periodo {
-            color: #aaa !important;
-        }
-
-        .exp-descripcion {
-            color: #bbb !important;
-        }
-
-        .cv-main,
-        .cv-sidebar {
-            break-inside: avoid;
-        }
-
-        .glass-wrapper {
-            background: rgba(255,255,255,0.03) !important;
-            border: 1px solid rgba(255,255,255,0.08) !important;
-        }
-
-        .timeline-content {
-            background: rgba(255,255,255,0.04) !important;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-        }
-
-        .logro-tag {
-            background: rgba(255,57,20,0.1) !important;
-            border: 1px solid rgba(255,57,20,0.25) !important;
-            color: #ff3914 !important;
         }
     }
 </style>

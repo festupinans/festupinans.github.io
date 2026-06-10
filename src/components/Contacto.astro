@@ -439,12 +439,20 @@ import { redesSociales } from "../data/redes";
 
         // Recopilar datos
         const formData = new FormData(form);
-        
+
         // El Access Key en un script client-side debe inyectarse o colocarse explícitamente en variables publicas
         const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
-        
-        if (!accessKey) {
-          console.warn("Falta configuración de Web3Forms");
+
+        if (!accessKey || typeof accessKey !== "string" || accessKey.trim() === "") {
+          console.error("Web3Forms access key faltante. Configurar PUBLIC_WEB3FORMS_ACCESS_KEY en .env");
+          submitBtn.classList.add("error");
+          submitBtn.innerHTML = '<span>Configuración faltante</span><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+          setTimeout(() => {
+            submitBtn.classList.remove("error");
+            submitBtn.innerHTML = originalBtnContent;
+            submitBtn.disabled = false;
+          }, 3500);
+          return;
         }
 
         formData.append("access_key", accessKey);

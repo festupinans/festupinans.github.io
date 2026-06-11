@@ -143,10 +143,12 @@ import { redesSociales } from "../data/redes";
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
     max-width: 1100px;
     width: 100%;
+    box-sizing: border-box;
   }
 
   .container {
     width: 100%;
+    max-width: 100%;
   }
 
   .contact-grid {
@@ -154,6 +156,11 @@ import { redesSociales } from "../data/redes";
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: start;
+  }
+
+  .contact-info,
+  .contact-form-wrapper {
+    min-width: 0;
   }
 
   .section-title {
@@ -176,6 +183,7 @@ import { redesSociales } from "../data/redes";
 
   .social-links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-bottom: 2.5rem;
   }
@@ -218,6 +226,8 @@ import { redesSociales } from "../data/redes";
     text-decoration: none;
     font-weight: 600;
     transition: opacity 0.3s ease;
+    overflow-wrap: anywhere;
+    word-break: break-all;
   }
 
   .email-link:hover {
@@ -261,6 +271,9 @@ import { redesSociales } from "../data/redes";
     font-family: inherit;
     transition: all 0.3s ease;
     outline: none;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .form-group input::placeholder,
@@ -295,6 +308,9 @@ import { redesSociales } from "../data/redes";
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 2.5rem;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .servicio-select option {
@@ -366,6 +382,10 @@ import { redesSociales } from "../data/redes";
 
     .email-cta {
       text-align: center;
+    }
+
+    .email-link {
+      font-size: 0.95rem;
     }
 
     .contact-form-wrapper {

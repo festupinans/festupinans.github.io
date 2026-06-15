@@ -35,11 +35,11 @@ import NavBar from "../components/NavBar.astro";
 		<meta name="twitter:description" content="Portfolio de Francisco Estupiñan — Desarrollador XR especializado en Realidades Extendidas, WebGL, Unity y experiencias 3D de alto rendimiento." />
 		<meta name="twitter:image" content="https://pachodev.netlify.app/Img/Favicon.webp" />
 
-		<!-- Google Fonts -->
+		<!-- Google Fonts: Inter (body) + Bebas Neue (display) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap"
 			rel="stylesheet"
 		/>
 
@@ -91,6 +91,13 @@ import NavBar from "../components/NavBar.astro";
 		scroll-behavior: smooth;
 	}
 
+	:root {
+		--font-display: "Bebas Neue", "Oswald", Impact, "Arial Narrow",
+			sans-serif;
+		--font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+			Roboto, sans-serif;
+	}
+
 	html,
 	body {
 		margin: 0;
@@ -98,17 +105,25 @@ import NavBar from "../components/NavBar.astro";
 		width: 100%;
 		min-height: 100%;
 		overflow-x: hidden;
-		font-family:
-			"Inter",
-			-apple-system,
-			BlinkMacSystemFont,
-			"Segoe UI",
-			Roboto,
-			sans-serif;
+		font-family: var(--font-body);
 		background: #000;
 		color: #fff;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Display font: títulos, headings, textos importantes */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	.font-display {
+		font-family: var(--font-display);
+		font-weight: 400;
+		letter-spacing: 0.02em;
+		line-height: 1.1;
 	}
 
 	main {

@@ -67,11 +67,6 @@
         </script>
 
         <title>CV - Francisco Estupiñán | Desarrollador XR</title>
-        <script>
-            document.getElementById("download-cv-btn")?.addEventListener("click", () => {
-                window.print();
-            });
-        </script>
     </head>
     <body>
         <header id="cv-navbar">
@@ -87,14 +82,20 @@
                         <a href="/cv" class="nav-link active">CV</a>
                     </li>
                 </ul>
-                <button class="download-btn" id="download-cv-btn" title="Descargar CV">
+                <a
+                    class="download-btn"
+                    id="download-cv-btn"
+                    href="/Francisco_Estupi%C3%B1an_CV.pdf"
+                    download="Francisco_Estupinan_CV.pdf"
+                    title="Descargar CV"
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                         <polyline points="7 10 12 15 17 10"/>
                         <line x1="12" y1="15" x2="12" y2="3"/>
                     </svg>
                     Descargar
-                </button>
+                </a>
             </nav>
         </header>
         <main>
@@ -237,35 +238,10 @@
         cursor: pointer;
         transition: background 0.2s;
         font-family: inherit;
+        text-decoration: none;
     }
 
     .download-btn:hover {
         background: #e0320e;
-    }
-
-    /* ── Print styles ── */
-    @page {
-        size: letter;
-        margin: 0.25in;
-    }
-
-    @media print {
-        *,
-        *::before,
-        *::after {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            color-adjust: exact !important;
-        }
-
-        html, body {
-            width: auto;
-            background: #fff !important;
-            color: #111 !important;
-        }
-
-        header {
-            display: none !important;
-        }
     }
 </style>
